@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>indent</title>
+	<link rel="stylesheet" href="">
+<style>
+*{
+	/*margin: 1px;*/
+	font-family: monospace;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+}
+.all{
+	display: flex;
+	flex-direction: column;
+}
+.row{
+	display: flex;
+	flex-direction: row;
+	margin-left: 2em;
+}
+
+div.o{
+	flex-direction: column;
+	/*margin-left: 0; */
+}
+/*div.o span.p, div.o span.a{
+	margin-left: 1em;
+}*/
+div.o span.v{
+	/*margin-left: 1em;*/
+	/*flex-direction: column;*/
+}
+/*span.p, span.v{
+	margin-left: 1em;
+}*/
+/*div.n span.p, div.n span.v, div.a span.v, div.a span.p{
+	margin-left: 0;
+	flex-direction: row;
+}
+*/
+div.a div.o {
+    margin-left: 0;
+}
+div.a span.v div.a, div.f span.v div.f{
+	margin-left: 0;
+}
+
+/*span.v div.a{
+	margin-left: 0;
+}*/
+.l{
+	display: inline;
+}
+.b{
+	display: inline-block;
+}
+.i{
+	font-style: italic;
+}
+.p{
+	white-space: nowrap;
+}
+
+/*
+.atr:before{
+	content: '^__^';
+}
+.v .atr:before{
+	content: '';
+}
+*/
+/*.a .a .p:before,.o .p:before{
+	content: '';
+}*/
+.v{
+	word-break: break-word;
+}
+.f{
+	
+	
+}
+.ff{
+	white-space: pre-wrap;
+	flex-direction: column;
+	margin-left: 0;
+}
+.f1{
+	margin-left: 0em;
+}
+.f2{
+	margin-left: 2em;
+}
+.f3{
+	margin-left: 4em;
+}
+.f4{
+	margin-left: 6em;
+}
+.f5{
+	margin-left: 8em;
+}
+
+/*.v > .row.f{
+	margin-left: 0;
+}
+/*
+.vf{
+	margin-left: 2em;
+}
+*/
+/* colores */
+.wwu{
+	color: green;
+}
+.wwc{
+	color: #f75db0;
+}
+.ww{
+	color: #088ac5;
+	font-style: italic;
+}
+
+.txt .ww, .txt .wwc{
+	color: inherit;
+}
+.no{
+	color: black;
+}
+.atr{
+	color: inherit;
+}
+.txt{
+	color: #e49401;
+/*	flex: 1; */
+    word-break: break-word;
+}
+.tl{
+	flex: 1;
+}
+.num{
+	color: #a272f7;
+}
+.bul{
+	color: green;
+}
+.nul{
+	color: red;
+}
+
+.comm{
+	color: #e20202;
+}
+
+
+</style>
+
+
+</head>
+<body>
+	
+<p>
+<div class="all">
+<div class="o row">
+<div class="n row"><span class="b no">{</span></div>
+<div class="n row">
+	<span class="p"><span class="atr">texto_chico</span><span class="l no">:</span></span>
+	<span class="v"><span class="txt">"soy pocas letras"</span><span class="l no"></span>,</span>
+</div>
+<div class="n row">
+	<span class="p"><span class="atr">texto_largo</span><span class="l no">:</span></span>
+	<span class="v"><span class="txt">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet omnis beatae distinctio esse tempora enim incidunt sed rem exercitationem eligendi ullam accusantium dolores aperiam nihil perferendis quas, reprehenderit fugit! Ratione."</span><span class="l no">,</span></span>
+</div>
+<div class="n row">
+	<span class="p"><span class="atr">numero</span><span class="l no">:</span></span>
+	<span class="v"><span class="num">3456</span><span class="l no">,</span></span>
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_corto</span><span class="l no">:[</span></span>
+	<span class="v"><span class="txt">"hola"</span><span class="l no">,</span><span class="txt">soy"</span><span class="l no">,</span><span class="txt">un"</span><span class="l no">,</span><span class="txt">array"</span><span class="l no">],</span></span>	
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_largo</span><span class="l no">:[</span></span>
+	<span class="v"><span class="txt">"Lorem"</span><span class="l no">,</span>
+	<span class="txt"> ipsum dolor sit amet"</span><span class="l no">,</span>
+	<span class="txt">consectetur"</span><span class="l no">,</span>
+	<span class="txt"> adipisicing elit."</span><span class="l no">,</span>
+	<span class="txt"> Excepturi"</span><span class="l no">,</span>
+	<span class="txt"> corporis eum "</span><span class="l no">,</span>
+	<span class="txt">iusto quia tempore "</span><span class="l no">,</span>
+	<span class="txt">officiis "</span><span class="l no">,</span>
+	<span class="txt">magnam officia "</span><span class="l no">,</span>
+	<span class="txt">deserunt "</span><span class="l no">,</span>
+	<span class="txt">aspernatur "</span><span class="l no">,</span>
+	<span class="txt">nulla libero"</span><span class="l no">,</span>
+	<span class="txt">veniam doloremque "</span><span class="l no">,</span>
+	<span class="txt">dolor architecto "</span><span class="l no">,</span>
+	<span class="txt">suscipit facilis"</span><span class="l no">,</span>
+	<span class="txt"> doloribus molestias "</span><span class="l no">,</span>
+	<span class="txt">minima?"</span><span class="l no">],</span>
+	</span>
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_numeros</span><span class="l no">:[</span></span>
+	<span class="v">
+		<span class="num">43</span><span class="l no">,</span>
+		<span class="num">144</span><span class="l no">,</span>
+		<span class="num">4546</span><span class="l no">,</span>
+		<span class="num">7564</span><span class="l no">,</span>
+		<span class="num">2123</span><span class="l no">,</span>
+		<span class="num">46456</span><span class="l no">,</span>
+		<span class="num">34677</span><span class="l no">,</span>
+		<span class="num">3234</span><span class="l no">,</span>
+		<span class="num">57657</span><span class="l no">],</span>
+	</span>	
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_misto</span><span class="l no">:[</span></span>
+	<span class="v">
+		<span class="txt">"hola"</span><span class="l no">,</span>
+		<span class="num">5436456</span><span class="l no">,</span>
+		<span class="txt">"soy"</span><span class="l no">,</span>
+		<span class="txt">"un"</span><span class="l no">,</span>
+		<span class="num">479275</span><span class="l no">,</span>
+		<span class="txt">"array"</span><span class="l no">,</span>
+		<span class="num">242</span><span class="l no">,</span>
+		<span class="num">567</span><span class="l no">,</span>
+		<span class="num">11</span><span class="l no">,</span>
+		<span class="txt">"mixto"</span><span class="l no">,</span>
+		<span class="bul">true</span><span class="l no">,</span>
+		<span class="bul">false</span><span class="l no">,</span>
+		<span class="txt">"con bolleans"</span><span class="l no">],</span>
+	</span>	
+</div>
+<div class="o row">
+	<span class="p"><span class="atr">objeto</span><span class="l no">:{</span></span>
+	<span class="v">
+		<div class="n row">
+			<span class="p"><span class="atr">texto1</span><span class="l no">:</span></span>
+			<span class="v"><span class="txt">"texto in 1"</span><span class="l no">,</span></span>
+		</div>
+		<div class="n row">
+			<span class="p"><span class="atr">text2</span><span class="l no">:</span></span>
+			<span class="v"><span class="txt">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!"</span><span class="l no">,</span></span>
+		</div>
+		<div class="n row">
+			<span class="p"><span class="atr">num1</span><span class="l no">:</span></span>
+			<span class="v"><span class="num">52344</span><span class="l no">,</span></span>
+		</div>
+		<div class="a row">
+			<span class="p"><span class="atr">array_in</span><span class="l no">:[</span></span>
+			<span class="v">
+				<span class="txt">"hola"</span><span class="l no">,</span>
+				<span class="num">5436456</span><span class="l no">,</span>
+				<span class="txt">"soy"</span><span class="l no">,</span>
+				<span class="txt">"un"</span><span class="l no">,</span>
+				<span class="num">479275</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">,</span>
+				<span class="num">242</span><span class="l no">,</span>
+				<span class="num">567</span><span class="l no">,</span>
+				<span class="num">11</span><span class="l no">,</span>
+				<span class="txt">"mixto"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<div class="o row">
+			<span class="p"><span class="atr">otro_obj</span><span class="l no">:{</span></span>
+			<span class="v">
+				<div class="n row">
+					<span class="p"><span class="atr">prp1</span><span class="l no">:</span></span>
+					<span class="v"><span class="txt">"valor uno"</span><span class="l no">,</span></span>
+				</div>
+				<div class="n row">
+					<span class="p"><span class="atr">prp2</span><span class="l no">:</span></span>
+					<span class="v"><span class="num">1234</span><span class="l no">,</span></span>
+				</div>
+			</span>
+			<span class="b no">}</span>
+		</div>
+	</span>	
+	<span class="b no">},</span>
+</div>
+<div class="n row">
+	<span class="p"><span class="atr">valor_null</span><span class="l no">:</span></span>
+	<span class="v"><span class="nul">null</span><span class="l no">,</span></span>	
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_cuasi_imposible</span><span class="l no">:[</span></span>
+	<span class="v">
+		<span class="txt">"hola"</span><span class="l no">,</span>
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span>
+			<span class="v">
+				<span class="txt">hola"</span><span class="l no">,</span>
+				<span class="txt">"soy"</span><span class="l no">,</span>
+				<span class="txt">"un"</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<span class="txt">"soy"</span><span class="l no">,</span>
+		<span class="txt">"un"</span><span class="l no">,</span>
+		<span class="txt">"array"</span><span class="l no">,</span>
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span></span>
+			<span class="v">
+				<span class="num">5436456</span><span class="l no">,</span>
+				<span class="num">479275</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">,</span>
+				<span class="num">242</span><span class="l no">,</span>
+				<span class="bul">true</span><span class="l no">,</span>
+				<span class="bul">false</span><span class="l no">,</span>
+				<span class="txt">"con bolleans"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<span class="txt">"con arrays"</span><span class="l no">],</span>
+	</span>	
+</div>
+<div class="a row">
+	<span class="p"><span class="atr">array_de_array</span><span class="l no">:[</span></span>
+	<span class="v">
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span>
+			<span class="v">
+				<span class="txt">hola"</span><span class="l no">,</span>
+				<span class="txt">"soy"</span><span class="l no">,</span>
+				<span class="txt">"un"</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span>
+			<span class="v">
+				<span class="txt">hola"</span><span class="l no">,</span>
+				<span class="txt">"soy"</span><span class="l no">,</span>
+				<span class="txt">"un"</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span>
+			<span class="v">
+				<span class="txt">hola"</span><span class="l no">,</span>
+				<span class="txt">"soy"</span><span class="l no">,</span>
+				<span class="txt">"un"</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<div class="a row">
+			<span class="p"><span class="atr"></span><span class="l no">[</span></span>
+			<span class="v">
+				<span class="num">5436456</span><span class="l no">,</span>
+				<span class="num">479275</span><span class="l no">,</span>
+				<span class="txt">"array"</span><span class="l no">,</span>
+				<span class="num">242</span><span class="l no">,</span>
+				<span class="bul">true</span><span class="l no">,</span>
+				<span class="bul">false</span><span class="l no">,</span>
+				<span class="txt">"con bolleans"</span><span class="l no">],</span>
+			</span>
+		</div>
+		<span class="l no">],</span>
+	</span>	
+</div>
+<div class="f row">
+			<span class="p"><span class="atr">funciones</span><span class="l no">:</span></span>
+			<span class="v">
+			  <div class="row f"><span class="ww i">function</span><span class="l no">(args,args){</span></div>
+				<div class="n row">
+					<span class="">console.log('algo')</span><span class="l no">;</span>
+				</div>
+				<div class="n row">
+					<span class="">var myVar=345</span><span class="l no">;</span>
+				</div>
+				<div class="o row">
+					<div class="n row">
+						<span class="">var myVar=345</span><span class="l no">;</span>
+					</div>
+					<div class="n row">
+						<span class="">var myVar=345</span><span class="l no">;</span>
+					</div>
+				</div>
+				<div class="n row">
+					<span class="">let res = arg1+arg2</span><span class="l no">;</span>
+				</div>
+				<div class="n row">
+					<span class="">return res</span><span class="l no">;</span>
+				</div>
+				<span class="no b">}</span>
+			</span>
+		</div>
+				<span class="txt">"con bolleans"</span><span class="l no">],</span>
+			</span>
+		</div>
+	
+</div><span>//final del objeto mayor</span>
+	
+	
+	</div>
+</p>
+
+<p id="pruebas"></p>
+
+<p id="pruebs">hola soy <span>spppaann</span>un texto</p>
+
+<script type="text/javascript" src="js/myObject.js"></script>
+<script type="text/javascript" src="js/myFunction.js"></script>
+
+</body>
+</html>

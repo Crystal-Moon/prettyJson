@@ -1,0 +1,194 @@
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap');*/
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i&display=swap');
+/* font-family: 'Open Sans', sans-serif; */
+/* font-family: 'Ubuntu Mono', monospace; */
+*{
+	
+		margin: 0;
+	padding: 0;
+}
+
+html, body{
+font-weight: 400;
+	font-size: 1rem;
+	font-family: 'Ubuntu Mono', monospace;
+	background-color: #272822;
+	color: white;
+	font-weight: normal;
+	width: 100%;
+	height: 100%;
+}
+header{
+	margin-top: 2em;
+}
+.ww{
+	color: #47b5ca;
+}
+.fun{
+	font-style: italic;
+}
+.comm{
+	color: #e84d72;
+}
+.arrow{
+	font-style: italic;
+}
+.var{
+	color: #b7e252;
+}
+.args{
+	color: #e68d32;
+	font-style: italic;
+}
+.n{
+	color: #a992fb;
+}
+.text{
+	color: #f3dd66;
+}
+
+
+nav{
+	background-color: grey;
+	border: black 1px solid;
+}
+
+h1, h2{
+	margin-left: 3%;
+	display: block;		
+}
+a{
+	color: inherit;
+    text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+span{
+	word-break: initial;
+}
+.codeBlock, p, div, br{
+	margin-left: 4%;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+	display: block;
+
+}
+p{
+		line-height: 1.1em;
+}
+div{
+	width: 90%;
+}
+.barra{
+	width: min-content;
+}
+.barra, .coment{
+	margin-left: 1%;
+	color: gray;
+}
+.project, .blockComent{
+	display: flex;
+	flex-direction: row;
+	margin-left: 0;
+}
+.project div{
+	width: 50%;
+	margin-left: 2%;
+}
+.array{
+	word-break: break-word;
+}
+#bdy{
+	margin: 0;
+	width: 87%;
+	display: flex;
+	flex-direction: row;
+}
+.varL{
+	display: inline-flex;margin-left: 0; width: 60%; margin-top: 0;
+}
+nav{
+	position: fixed;
+	width: 12%;
+	right: 0;
+	height: 100%;
+	top: 0;
+}
+footer{
+	width: 87%;
+}
+
+
+
+@media screen and (max-width:1050px), screen and (max-device-width:1050px){
+	body .header{background-attachment: scroll;}
+}
+
+
+/*ipad portrait*/
+@media only screen and (min-device-width:768px) and (max-device-width : 1024px) and (orientation : portrait){
+	.header{background-attachment: scroll;}
+}
+
+
+
+
+@media screen and (max-width:780px) {
+	
+
+.varL{
+	display: inline-table;
+	word-break: break-word;
+margin-left: 5%;
+    width: 95%;
+}
+#bdy{
+	width: 100%;
+}
+nav{
+	display: none;
+}
+h1{
+	font-size: 1.4rem;
+}
+h2{
+	font-size: 1.2rem;
+}
+div{
+	width: 95%;
+}
+.project span.text{
+	/*display: block;
+    margin-left: 5%; */
+}
+
+.array{
+	width: 95%;
+}
+
+
+
+
+
+}
+
+
+@media screen and (max-width:1300px) {
+
+.project{
+	flex-direction: column;
+}
+.project div{
+	width: 95%;
+}
+
+
+
+
+}
+
+
+
+
+
