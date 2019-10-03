@@ -12,7 +12,7 @@ let config={
 
 const WWU=[]
 const WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null','true','false','with','private','long','short','try','catch','throw','new','while','finally','instanceof'];
-const WW=['var','let','const', 'console.log','function','extends','import','export','debugger','super','this','typeof','void']
+const WW=['var','let','const','class ','console.log','function','extends','import','export','debugger','super','this','typeof','void']
 
 const C = e=>document.createElement(e), 
 cs = (e,c)=>{e.classList.add(c);}, 
@@ -290,7 +290,7 @@ let tmp1=obj;
 	.replace('500','<span class="error">500</span>')
 */	
 let cfg={
-	functions:'function'
+	functions:false
 }
 	
 	//variables
@@ -306,8 +306,16 @@ let i=1;
 let q=false;
 for(let y=0;y<lineas.length;y++){
 
-	if(cfg.functions=='arrow' && lineas[y].indexOf('function')>=0) lineas[y]=lineas[y].replace('{','=>{').replace('function','');
-	else if(cfg.functions=='function' && lineas[y].indexOf('=>')>=0){ 
+	if(cfg.functions=='arrow' && lineas[y].indexOf('function')>=0){
+		if(/(function)(?=( |)(\w+))/.test(lineas[y])){
+			lineas[y]=lineas[y].replace('{','=>{').replace('function','var').replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=')
+			//console.log('linea sin problemas',lineas[y])
+			//console.log('linea replace exp',lineas[y].replace(new RegExp('(\\w*)(?=\\()'),'$1'+'='))
+			//lineas[y]=lineas[y].replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=')
+		}else{
+			lineas[y]=lineas[y].replace('{','=>{').replace('function','');
+		}
+	}else if(cfg.functions=='function' && lineas[y].indexOf('=>')>=0){ 
 		if(lineas[y].indexOf('(')>=0){
 			lineas[y]='function'+lineas[y];
 			lineas[y]=lineas[y].replace('=>','')
@@ -331,6 +339,47 @@ let k=null;
 cs(l,'no');
 cs(l,'row');
 
+
+//---------------------------------------------------	expreciones para params en arrow
+/*
+let args_y_parentesis=/(^([>(,]|[ ]|){1})+(.\w)+(([,)<]|[ ]){1})/g
+let solo_letras_args=/([\w*]+)/g
+let funcional=/(([(])(.*)(([)])|[ ]|())(=>))|(([ ]|)(\w*)([ ]|())(=>))/g
+let para_1_solo_param=/(\w{1,}(?=((=>)|(\)=>))))/g
+let casi_casi=/(\w{1,}(?=((=>)|(\)=>))))|(\w{1,}(?=((,)|(\)))))((.*)?=(=>))/g //segir probando
+let mejor_hasta_hr=/([\w ,]*)(?=(\)| ){1,3}(=>))|(\w*(?=(| ){1}(=>)))/g
+
+
+if(ly.indexOf('=>')>0){
+	//ineresantisimo el uso de exc
+	//https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/RegExp/exec
+	var re = mejor_hasta_hr;
+	var result = re.exec(ly);
+	console.log('ly |'+ly)
+	console.log('re-lasteIndex',re.lastIndex)
+	console.log('resul',result[0])
+	console.log('----------------------------------------------')
+	
+
+	let params=result[0].match(solo_letras_args)
+	console.log('params array',params)
+	if(params) params.forEach((p)=>{
+		
+		let vl1=C(S);
+		inn(vl1,p)
+		console.log('p',p)
+		console.log('onn vl1',onn(vl1))
+		ly=ly.replace(p, onn(vl1))
+		console.log(vl1)
+		console.log('ly despues del rep',ly)
+	})//, params)
+
+	
+	
+	
+}
+*/
+//----------------------------------------------------------------
 	
 
 	//let z=true;
@@ -341,30 +390,31 @@ let vlt=C(S);
 //inn(vlt,inn(vlt)+chars[x]) //posiblemente aqui
 	//console.log('ly es |'+ly+'|')
 //console.log('ly es |'+ly+'|')
+
 if(chars[x]=='(' && ly.indexOf('(')>0 ){	
 //console.log('ly es |'+ly+'|')
 	let a=ly.substring(0, x);
+	//console.log(a)
+	
 	a=a.split('').reverse().join('');
-//	console.log('a en reverse |'+a+'|')
+	//console.log('a en reverse |'+a+'|')
 	if(/[:= *+\-./(]{1}/.test(a)){ 
 		a=a.substring(0,a.search(/[:= *+\-./(]{1}/));
 //		console.log('segundo sub |'+a+'|')
 	}
+	if(a.length>0){
 	a=a.split('').reverse().join('');
 //	console.log('a listo para push |'+a+'|')
 	if(!WW.includes(a)&&!WWC.includes(a)) {
 		WWU.push(' '+a,a);
+		//WWU.push(a);
 //		console.log('se pusheo |'+a+'|')
 	}
 }
 
-let args_y_parentesis=/(^([>(,]|[ ]|){1})+(.\w)+(([,)<]|[ ]){1})/g
-let solo_letras_args=/\w/g
-let mmmm=/(([(,]|[ ]|){1})+(\w)+(([,)<]|(( |)=>)){1})/g
-
-if(lineas[y].indexOf('=>')>0){
-
 }
+
+
 
 let vl=C(S);
 //console.log('inicio del bucle--- aqui sh es: ',chars[x])
@@ -468,7 +518,7 @@ var exp=/(^([}.)>]|[ ]|){1})+(book)+(([;:{(.<]|[ ]){1})/g
 		//	lstr=RW(lstr,w,'wwc');
 		
 	//}
-	let exp=new RegExp('(([}.]|[ ]|){1}){1}('+w+')+(([;:{(.]|[ ]){1})','g')
+	let exp=new RegExp('(([}.]|[ ]|){1}){1}('+w+')+((|[;:{(.]|[ ]){1})','g')
 	//console.log(lstr)
 	//console.log(exp)
 	if(lstr.search(exp)>=0){
@@ -488,6 +538,41 @@ var exp=/(^([}.)>]|[ ]|){1})+(book)+(([;:{(.<]|[ ]){1})/g
 			lstr=RW(lstr,w,'ww');
 		}
 	});
+
+	//-------------------------------------- params bonito
+	
+	let solo_letras_args=/([\w*]+)/g
+	//let mejor_hasta_hr=/([\w ,]*)(?=(\)| ){1,5}((=>)|(=&gt;)))|(\w*(?=(| ){1}((=>)|(=&gt;))))/g
+	let mejor_hasta_hr2=/([\w ,]*)(?=(\)|,){1,2}(<))|(\w*(?=(|){1}(<)([^/])))/g
+//	console.log('lstr |'+lstr)
+	if((lstr.indexOf('=>')>0||lstr.indexOf('=&gt;')>0)||lstr.indexOf('function')>=0){
+	//ineresantisimo el uso de exc
+	//https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/RegExp/exec
+	var re = mejor_hasta_hr2;
+	var result = re.exec(lstr);
+	//console.log('lstr |'+lstr)
+	//console.log('re-lasteIndex',re.lastIndex)
+	//console.log('resul',result)
+	//console.log('----------------------------------------------')
+	
+	if(result){
+	let params=result[0].match(solo_letras_args)
+	//console.log('params array',params)
+	if(params) params.forEach((p)=>{
+		
+		let vl1=C(S);
+		inn(vl1,p)
+		//console.log('p',p)
+		cs(vl1,'arg')
+
+	//	console.log('onn vl1',onn(vl1))
+		lstr=lstr.replace(new RegExp('('+p+')(?!\\w+)'), onn(vl1))
+		//console.log(vl1)
+	//	console.log('lstr despues del rep',lstr)
+	})//, params)	
+	}
+}
+//-----------------------------------------------
 	
 	inn(l,lstr);
 	
@@ -514,7 +599,7 @@ const RW=(s,w,css)=>{
 	cs(vl,'l');
 	cs(vl,css);
 	inn(vl,w);
-	s=s.replace(new RegExp(w,'g'),vl.outerHTML);
+	s=s.replace(new RegExp('('+w+')(?!\\w+)','g'),vl.outerHTML);
 	return s;
 }
 

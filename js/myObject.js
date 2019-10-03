@@ -64,9 +64,13 @@ const myObject={
 			propC:null
 		}
 		let res= a/2;
-		if(res>0&&3+1==algo1234){
-			a=10;
-			res-=a;
+		switch(abc()>99) {
+			case label_1:
+				let a=822;
+				break;
+			default:
+				let b='texto'
+				break;
 		}
 		return res;
 	},
@@ -88,7 +92,9 @@ const myObject={
 		if(res>0){
 			param=10;
 			res-=param;
-		}
+		}else if(res<0){
+			param='texto'
+		}else abc(param)
 		res=res.concat(abc());
 		res=res.concat(abc(abc('text',123,res)));
 		return res;
