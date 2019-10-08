@@ -15,9 +15,10 @@ const myObject={
 		num1:52344,
 		array_in:["hola",5436456,"soy","un",479275,"array",242,567,11,"mixto","en array_in del objeto"]
 	},
+	objeto_symbol: Symbol('foo (algo1234)Name'),
 	objeto_date: new Date(),
 	valor_null: null,
-	booleann: true,
+	"booleann": true,
 	array_cuasi: ["hola",["hola","soy","un","array"],"soy","un","array",[5436456,479275,"array",242,true,false,"con bolleans"],"con arrays"],
 	array_array: [["array","uno"],["array","dos"],["array","tres"],["array","cuatro"],["cindo",5436456,479275,"array",242,true,false,"con bolleans"]],
 
@@ -25,11 +26,11 @@ const myObject={
 		{
 			text1:"texto in 1",
 			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:52344
+			num1:Infinity
 		},{
 			text1:"texto in 1",
 			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:52344
+			num1:NaN
 		},{
 			text1:"texto in 1",
 			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
@@ -144,3 +145,39 @@ let myArray=[
 		},
 ["array","uno"],["array","dos"],["array","tres"],["array","cuatro"],["cindo",5436456,479275,"array",242,true,false,"con bolleans"]
 ]
+
+/*
+generalidades de json
+https://lenguajejs.com/p/javascript/caracteristicas/json
+
+indentar con JSON.stringify()
+https://programacion.net/articulo/indentar_json_con_javascript_1170
+
+code pritty...
+https://github.com/google/code-prettify
+https://github.com/kasparsd/code-prettify
+https://github.com/padolsey-archive/prettyprint.js 		//lo convierte en tablas :D
+
+ejemplo de stringify con funciones
+https://medium.com/javascript-in-plain-english/how-to-use-stringify-and-parse-in-javascript-6b637b571a32
+https://www.dyn-web.com/tutorials/php-js/json/filter.php
+https://stackoverflow.com/questions/30280322/how-to-stringify-objects-through-jsons-replacer-function
+
+diferenciar entre object y array
+
+Array.isArray([1, 2, 3]);  // true
+Array.isArray({foo: 123}); // false
+Array.isArray('foobar');   // false
+Array.isArray(undefined);  // false
+
+generar una hoja de stylos css con javascript
+
+var style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.cssClass { color: #F00; }';
+document.getElementsByTagName('head')[0].appendChild(style);
+
+document.getElementById('someElementId').className = 'cssClass';
+
+
+*/

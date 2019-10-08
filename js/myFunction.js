@@ -48,7 +48,7 @@ CM={
 	r:'CM_r',
 	at:'CM_at',
 	v:'CM_v',
-"string":"txt",
+	"string":"txt",
 	"number":"num",
 	"boolean":"bul",
 	"undefined":"und",
@@ -57,15 +57,20 @@ CM={
 t = e=>typeof e,
 isA = e=>Array.isArray(e);
 
-
-function prettyJson(OBJ,cfg){
-cfg={
-	functions: 'arrow', //'arrow', 'function', null, se pone tal cual esta
-	noJson: 'symbol', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
-	dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
+const MYCONFIG={
+	functions: null, //'arrow', 'function', null, se pone tal cual esta
+	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
+	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
 	comillas: false //true, false //default true
+}
+
+function prettyJson(OBJ,CONFIG){
+cfg={
+	ff:CONFIG.functions,
+	noJ:CONFIG.noJson,
+	cc:CONFIG.comillas
 };
-//OBJ=(cfg.ilegal)?OBJ:JSON.parse(JSON.stringify(OBJ));
+OBJ=(cfg.noJ)?OBJ:JSON.parse(JSON.stringify(OBJ));
 
 
 let all=C('div');
@@ -79,7 +84,7 @@ app(all,st)
 //--------------------------------------------------------------
 
 function R(obj,k,ia){
-	let cc=(cfg.comillas)?'"':'';
+	let cc=(cfg.cc)?'"':'';
 let r=C('div');	
 cs(r,'row')
 	//for (k in obj) {
@@ -111,9 +116,9 @@ let tmp1=obj;
 if(t(tmp1)==T.f){
 	//console.log('es funcion o un Symbol')
 	
-	console.log('cfg noJson',cfg.noJson)
+	console.log('cfg noJson',cfg.noJ)
 	//if (cfg.noJson==('all'||'function')) 
-	if(/(all)|(function)/.test(cfg.noJson)){ 
+	if(/(all)|(function)/.test(cfg.noJ)){ 
 		inn(pp,':');
 		app(v ,esFuncion(tmp1.toString()) );
 	//cs(r, t(tmp1))
@@ -123,7 +128,7 @@ if(t(tmp1)==T.f){
 }
 }else if (t(tmp1)==T.sy) {
 	console.log('es symbol');
-	if(/(all)|(symbol)/.test(cfg.noJson)){ 
+	if(/(all)|(symbol)/.test(cfg.noJ)){ 
 		console.log('comun',tmp1)
 		console.log('toS',tmp1.toString())
 
@@ -146,7 +151,7 @@ if(t(tmp1)==T.f){
 	cs(r,'n'); 
 	inn(pp,':');
 	cc=(t(tmp1)==T.s)?'"':'';
-	if(t(tmp1)==T.n&&String(tmp1)=='Infinity'&&cfg.noJson!='all') tmp1=null;
+	if(t(tmp1)==T.n&&/(Infinity)|(NaN)/.test(String(tmp1))&&cfg.noJ!='all') tmp1=null;
 	inn(val, cc+String(tmp1)+cc);
 	cs(val, CM[ t(tmp1) ] );
 	app(v,val);
@@ -195,7 +200,7 @@ app(v,vv);
   	inn(pp,':');
   	let dd=C(S);
   	cs(dd,'txt');
-  	if(/(all)|(date)/.test(cfg.noJson)){
+  	if(/(all)|(date)/.test(cfg.noJ)){
 	
 	//if(/(all)|(date)/.test(cfg.noJson)) app(v ,valorIlegal(tmp1,t(tmp1)) );
 	//else{
@@ -360,9 +365,9 @@ let tmp1=obj;
 	.replace('403','<span class="alert">403</span>').replace('404','<span class="alert">404</span>')
 	.replace('500','<span class="error">500</span>')
 */	
-let cfg={
-	functions:false
-}
+//let cfg={
+//	functions:false
+//}
 	
 	//variables
 //preElement.innerHTML='';
@@ -377,7 +382,7 @@ let i=1;
 let q=false;
 for(let y=0;y<lineas.length;y++){
 
-	if(cfg.functions=='arrow' && lineas[y].indexOf('function')>=0){
+	if(cfg.ff=='arrow' && lineas[y].indexOf('function')>=0){
 		if(/(function)(?=( |)(\w+))/.test(lineas[y])){
 			lineas[y]=lineas[y].replace('{','=>{').replace('function','var').replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=')
 			//console.log('linea sin problemas',lineas[y])
@@ -386,7 +391,7 @@ for(let y=0;y<lineas.length;y++){
 		}else{
 			lineas[y]=lineas[y].replace('{','=>{').replace('function','');
 		}
-	}else if(cfg.functions=='function' && lineas[y].indexOf('=>')>=0){ 
+	}else if(cfg.ff=='function' && lineas[y].indexOf('=>')>=0){ 
 		if(lineas[y].indexOf('(')>=0){
 			lineas[y]='function'+lineas[y];
 			lineas[y]=lineas[y].replace('=>','')
