@@ -4,8 +4,7 @@ let config={
 	functions: 'arrow', //'arrow', 'function', null, se pone tal cual esta
 	noJson: 'function', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
 	dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
-	space: 'myDibujo', //'myDibujo', 123, null(se toma dos espacios) //no hacer!!
-	comillas: false //true, false
+	comillas: false //true, false //default true
 
 }
 
@@ -61,8 +60,10 @@ isA = e=>Array.isArray(e);
 
 function prettyJson(OBJ,cfg){
 cfg={
-	comillas:false,
-	noJson: 'all'
+	functions: 'arrow', //'arrow', 'function', null, se pone tal cual esta
+	noJson: 'symbol', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
+	dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
+	comillas: false //true, false //default true
 };
 //OBJ=(cfg.ilegal)?OBJ:JSON.parse(JSON.stringify(OBJ));
 
@@ -77,7 +78,7 @@ app(all,st)
 
 //--------------------------------------------------------------
 
-function R(obj,k){
+function R(obj,k,ia){
 	let cc=(cfg.comillas)?'"':'';
 let r=C('div');	
 cs(r,'row')
@@ -89,7 +90,12 @@ let pp=C(S);
 cs(pp,'no');
 
 let atr=C(S);
-if(isNaN(k)) inn(atr,cc+k+cc);
+if(!ia){
+ inn(atr,cc+k+cc);
+//if (isNaN(k)&&cfg.noJson) inn(atr,cc+k+cc);
+//else if(!isNaN(k)) inn(atr,cc+k+cc);
+
+}
 else inn(atr,'');
 
 cs(atr,'atr');
@@ -102,17 +108,45 @@ let vv=C(S);
 cs(vv,'no');
 let tmp1=obj;
 
-if(t(tmp1)==T.f || t(tmp1)==T.sy){
+if(t(tmp1)==T.f){
 	//console.log('es funcion o un Symbol')
-	inn(pp,':');
-	if (cfg.noJson) app(v ,valorIlegal(tmp1,t(tmp1)) );
+	
+	console.log('cfg noJson',cfg.noJson)
+	//if (cfg.noJson==('all'||'function')) 
+	if(/(all)|(function)/.test(cfg.noJson)){ 
+		inn(pp,':');
+		app(v ,esFuncion(tmp1.toString()) );
 	//cs(r, t(tmp1))
+}else{
+	inn(atr,' ')
+	inn(pp,' ')
+}
+}else if (t(tmp1)==T.sy) {
+	console.log('es symbol');
+	if(/(all)|(symbol)/.test(cfg.noJson)){ 
+		console.log('comun',tmp1)
+		console.log('toS',tmp1.toString())
 
+		inn(pp,':');
+		let ss=C(S), t=C(S);
+		cs(ss,'ww');
+		cs(t,'txt');
+		inn(ss,'Symbol');
+
+		//var result = /(?<=(\())(.*)(?=(\)))/.exec(tmp1.toString())[0];
+		//console.log(result)
+		inn(t,'"'+/(?<=(\())(.*)(?=(\)))/.exec(tmp1.toString())[0]+'"');
+		inn(v,onn(ss)+'('+onn(t)+')');
+}else{
+	inn(atr,' ')
+	inn(pp,' ')
+}
 }else if(t(tmp1)!=T.o || tmp1===null){ 
 
 	cs(r,'n'); 
 	inn(pp,':');
 	cc=(t(tmp1)==T.s)?'"':'';
+	if(t(tmp1)==T.n&&String(tmp1)=='Infinity'&&cfg.noJson!='all') tmp1=null;
 	inn(val, cc+String(tmp1)+cc);
 	cs(val, CM[ t(tmp1) ] );
 	app(v,val);
@@ -132,7 +166,7 @@ if(t(tmp1)==T.f || t(tmp1)==T.sy){
 	cs(v1,'l');
 	
 		if(t(tmp[x])=='object'&&tmp[x]!==null){
-			let aa=R(tmp[x],x);
+			let aa=R(tmp[x],x,'ia');
 	
 			app(v, aa );
 
@@ -154,10 +188,47 @@ if(t(tmp1)==T.f || t(tmp1)==T.sy){
 inn(vv,'],');
 app(v,vv);
 }else{ 
+
   try{
-	let d=tmp1.toISOString();
+  	let d=tmp1.toISOString();
+  	cs(r,'n'); 
+  	inn(pp,':');
+  	let dd=C(S);
+  	cs(dd,'txt');
+  	if(/(all)|(date)/.test(cfg.noJson)){
+	
+	//if(/(all)|(date)/.test(cfg.noJson)) app(v ,valorIlegal(tmp1,t(tmp1)) );
+	//else{
+		let n=C(S), D=C(S), f=C(S);
+		cs(n,'l');
+		cs(n,'wwc');
+		inn(n,'new ');
+		cs(D,'ww');
+		inn(D,'Date');
+		cs(f,'no');
+
+		
+		
+		inn(dd,'"'+tmp1.getFullYear() +'/'+(tmp1.getMonth()+1)+'/'+tmp1.getDate()+
+			((tmp1.getHours())?' '+tmp1.getHours()+':'+
+				((tmp1.getMinutes()<10)?'0'+tmp1.getMinutes():tmp1.getMinutes())+':'+
+			((tmp1.getSeconds()<10)?'0'+tmp1.getSeconds():tmp1.getSeconds()) :'')+'"');
+		inn(f,'('+onn(dd)+'),');
+		
+		app(val,n);
+		app(val,D);
+		app(val,f);
+	//}
 	//console.log('es un objeto Date')
 	//valorIlegal(tmp1,'Date');
+}else{
+inn(dd,'"'+tmp1.toISOString()+'"')
+val=dd;
+inn(vv,',')
+		
+}
+app(v,val);
+		app(v,vv);
   }catch{
 
 	cs(r,'o'); 
@@ -215,7 +286,7 @@ function valorIlegal(value,z){
 			x=esFuncion(x)
 			break;
 		case T.d:
-			// statements_1
+			x=isD(tmp1.toString());
 			break;
 		case T.sy:
 			x=value.toString();
@@ -579,7 +650,7 @@ var exp=/(^([}.)>]|[ ]|){1})+(book)+(([;:{(.<]|[ ]){1})/g
 	app(r,l);
 	
 } // fin for lineas
-//preElement.innerHTML=ls;
+
 
 return r;
 }// fin de esFuncion
