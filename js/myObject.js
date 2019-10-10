@@ -1,4 +1,6 @@
+
 const myObject={
+	
 	texto_chico: "soy pocas letras",
 	texto_largo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet omnis beatae distinctio esse tempora enim incidunt sed rem exercitationem eligendi ullam accusantium dolores aperiam nihil perferendis quas, reprehenderit fugit! Ratione.",
 	numero: 3456,
@@ -18,34 +20,19 @@ const myObject={
 	objeto_symbol: Symbol('foo (algo1234)Name'),
 	objeto_date: new Date(),
 	valor_null: null,
+	valor_undefined:undefined,
 	"booleann": true,
 	array_cuasi: ["hola",["hola","soy","un","array"],"soy","un","array",[5436456,479275,"array",242,true,false,"con bolleans"],"con arrays"],
 	array_array: [["array","uno"],["array","dos"],["array","tres"],["array","cuatro"],["cindo",5436456,479275,"array",242,true,false,"con bolleans"]],
-
-	array_de_objetos:[
-		{
-			text1:"texto in 1",
-			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:Infinity
-		},{
-			text1:"texto in 1",
-			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:NaN
-		},{
-			text1:"texto in 1",
-			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:52344
-		},{
-			text1:"texto in 1",
-			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
-			num1:52344
-		}
-	],
 	vars45:345,
 	var12:'variable numerica',
-	funcion_comun: function(a,b,c){
-		let res=a+b+c;
-		let var45="variable num";
+	funcion_comun: function(a=56,b,c){
+		class Rect {
+  			constructor(height, width) {
+    		this.height = height;
+    		this.width = width;
+  			}
+		}
 		let var88=1234;
 		if(res>0){
 			a=10;
@@ -58,12 +45,7 @@ const myObject={
 		for(var i = algo1234.length - 1; i >= 0; i--){
 			algo1234[i]=''
 		}
-		let nombre_cifred='algo';
-		let myObj={
-			propaA:123,
-			propB:'propiedad',
-			propC:null
-		}
+
 		let res= a/2;
 		switch(abc()>99) {
 			case label_1:
@@ -75,7 +57,7 @@ const myObject={
 		}
 		return res;
 	},
-	funcion_arrow: (a,b,c)=>{
+	funcion_arrow: (a='texto',b,c)=>{
 		const unaVariable_larga="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt voluptatem magnam, necessitatibus! Voluptatum officia non aliquid totam ducimus molestias, harum blanditiis, alias voluptatibus facere nisi quia quibusdam, sit sint ullam."
 		let res= a+b+c;
 		if(res>0){
@@ -100,6 +82,25 @@ const myObject={
 		res=res.concat(abc(abc('text',123,res)));
 		return res;
 	},
+	array_de_objetos:[
+		{
+			text1:"texto in 1",
+			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
+			num1:Infinity
+		},{
+			text1:"texto in 1",
+			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
+			num1:NaN
+		},{
+			text1:"texto in 1",
+			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
+			num1:52344
+		},{
+			text1:"texto in 1",
+			text2:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, consequatur, quia dolorum iusto voluptates corrupti quas iure repellat voluptatum eveniet, numquam cupiditate optio mollitia eum! Nemo odio sapiente, aliquam unde!",
+			num1:52344
+		}
+	],
 	objeto_de_objetos:{
 		ob1:{
 			text1:"texto in 1",

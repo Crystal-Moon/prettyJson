@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i&display=swap');
 /*
 
 	p:'CM_p',
@@ -14,14 +15,45 @@
 .CM_all{
 	display: flex;
 	flex-direction: column;
-	font-family: monospace;
+	font-family: 'Ubuntu Mono', monospace;
+	position: relative;
+	font-size: inherit;
 }
 .CM_r{
 	display: flex;
 	flex-direction: row;
 	margin-left: 2em;
 }
-
+.CM_r1{
+	margin-left: 1em;
+}
+.CM_r2{
+	margin-left: 2em;
+}
+.CM_r3{
+	margin-left: 3em;
+}
+.CM_r4{
+	margin-left: 4em;
+}
+.CM_r5{
+	margin-left: 5em;
+}
+.CM_r6{
+	margin-left: 6em;
+}
+.CM_r7{
+	margin-left: 7em;
+}
+.CM_r8{
+	margin-left: 8em;
+}
+.CM_r9{
+	margin-left: 9em;
+}
+.CM_r10{
+	margin-left: 10em;
+}
 div.CM_o{
 	flex-direction: column;
 	/*margin-left: 0; */
@@ -111,3 +143,16 @@ div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 	margin-left: 2em;
 }
 */
+
+.CM_nros{
+	font-size: inherit;
+    position: absolute;
+    width: auto;
+    margin-left: -2.3em;
+    flex-direction: column;
+    display: flex;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    text-align: right;
+}
