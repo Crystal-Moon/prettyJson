@@ -1,30 +1,7 @@
-/*
 
-	c:'CM_com',	//comunes
-	k:'CM_key',
-	s:'CM_txt',
-	n:'CM_num',
-	z:'CM_null',
-	u:'CM_udf',
-	x:'CM_x',
-	w:'CM_w',
-	wc:'CM_wc',
-	wu:'CM_wu',
-	ags:'CM_ags',
-
-	"string":"CM_txt",
-	"number":"CM_num",
-	"boolean":"CM_bool",
-	"undefined":"CM_udf",
-	"object":"CM_null",
-
-*/
-
-/* colores */
 .CM_all{
 	color: black;
 }
-
 .CM_wu{
 	color: green;
 }
@@ -35,7 +12,6 @@
 	color: #088ac5;
 	font-style: italic;
 }
-
 .CM_txt .CM_w, .CM_txt .CM_wc, .CM_txt .CM_wu{
 	color: inherit;
 }
@@ -47,14 +23,12 @@
 }
 .CM_txt{
 	color: #d68b03;
-/*	flex: 1; */
     word-break: break-word;
 }
 .CM_ags{
 	color: #7a8c1b;
 	font-style: italic;
 }
-
 .CM_num{
 	color: #a272f7;
 }
@@ -64,11 +38,9 @@
 .CM_null, .CM_udf{
 	color: #cc0404;
 }
-
 .CM_x{
 	color: #e20202;
 }
-
-.CM_nros{
+.CM_index{
 	color: #444;
 }

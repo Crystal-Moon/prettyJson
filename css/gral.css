@@ -1,16 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i&display=swap');
-/*
-
-	p:'CM_p',
-	l:'CM_l',b
-	o:'CM_o',
-	a:'CM_a',
-	b:'CM_b',
-	r:'CM_r',
-	v:'CM_v',
-
-*/
-
 .CM_all{
 	display: flex;
 	flex-direction: column;
@@ -55,33 +43,13 @@
 }
 div.CM_o{
 	flex-direction: column;
-	/*margin-left: 0; */
 }
-/*div.CM_o span.CM_p, div.CM_o span.CM_a{
-	margin-left: 1em;
-}*/
-div.CM_o span.CM_v{
-	/*margin-left: 1em;*/
-	/*flex-direction: column;*/
-}
-/*span.CM_p, span.CM_v{
-	margin-left: 1em;
-}*/
-/*div.CM_n span.CM_p, div.CM_n span.CM_v, div.CM_a span.CM_v, div.CM_a span.CM_p{
-	margin-left: 0;
-	flex-direction: row;
-}
-*/
 div.CM_a div.CM_o {
     margin-left: 0;
 }
 div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 	margin-left: 0;
 }
-
-/*span.CM_v div.CM_a{
-	margin-left: 0;
-}*/
 .CM_l{
 	display: inline;
 }
@@ -94,25 +62,12 @@ div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 .CM_p{
 	white-space: nowrap;
 }
-
-/*
-.CM_atr:before{
-	content: '^__^';
-}
-.CM_v .CM_atr:before{
-	content: '';
-}
-*/
-/*.CM_a .CM_a .CM_p:before,.CM_o .CM_p:before{
-	content: '';
-}*/
 .CM_v{
 	word-break: break-word;
 }
 .CM_tl{
 	flex: 1;
 }
-
 .CM_ff{
 	white-space: pre-wrap;
 	flex-direction: column;
@@ -133,17 +88,7 @@ div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 .CM_f5{
 	margin-left: 8em;
 }
-
-/*.CM_v > .CM_row.CM_f{
-	margin-left: 0;
-}
-/*
-.CM_vf{
-	margin-left: 2em;
-}
-*/
-
-.CM_nros{
+.CM_index{
 	font-size: inherit;
     position: absolute;
     width: auto;

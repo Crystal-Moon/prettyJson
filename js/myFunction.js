@@ -1,37 +1,11 @@
-const p=document.getElementById('pruebas');
-const MYCONFIG={
-	functions: 'function', //'arrow', 'function', null, se pone tal cual esta
-	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
-	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
-	comillas: false, //true, false //default false
-	index: true, //nueros del costado, true o false 
-	//allow: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
-	allow: null,	//SOLO TEXTOS de key
-	indent:null, 	//cantidad de saltos desde la izq
-	font:null 		//'"Inconsolata", monospace' ejemplo
-}
-const MYCOLOR={
-	all: '#f75db0',
-	string: 'yellow',
-	number: '#f75db0',
-	boolean: '#f75db0',
-	nulos: 'red',
-	undef: 'red',
-	key: 'brown',
-	maths: 'violet',
-	words: 'lime',
-	words_ctrl: 'pink',
-	words_user: 'red',
-	args: 'orange',
-	nros: 'pink'
-}
-
 function prittyJson(OBJ,CFG={},CLR={}){
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ));
 
 const WWU=[],
-WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null','true','false','with','private','long','short','try','catch','throw','new','while','finally','instanceof'],
-WW=['var','let','const','class','console.log','function','extends','import','export','debugger','super','this','typeof','void'],
+WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null',
+	'true','false','with','private','long','short','try','catch','throw','new','do','while','finally','instanceof'],
+WW=['var','let','const','class','console.log','function','extends','import','export','debugger','super','this',
+	'typeof','void'],
 
 C = e=>document.createElement(e), 
 cs = (e,c)=>{e.classList.add(c)}, 
@@ -110,12 +84,11 @@ t = e=>typeof e,
 isA = e=>Array.isArray(e);
 
 let LINS=1, UC=(t(CLR)==T.s)?CLR:undefined;
-
 //-------------------------------------------------------------------------------------------
 const lcss=(userSheet=PT.c)=>{
 let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
 if(!y){
-	var c1=C('link'),c2=C('link');
+	let c1=C('link'),c2=C('link');
   	c1.rel='stylesheet';
   	c1.href=PT.g
   	app(document.getElementsByTagName("head")[0],c1);
@@ -127,65 +100,62 @@ if(!y){
 }
 //-------------------------------------------------------------------------------------------
 function esFuncion(fn){
-let lineas=fn.split('\n'), r=C(D), i=1;
+let ls=fn.split('\n'), r=C(D), i=1;
 cs(r,CM.r);
 cs(r,'CM_ff');
 
-for(let y=0;y<lineas.length;y++){
+for(let y=0;y<ls.length;y++){
 	LINS+=2;
-	if(CFG.functions=='arrow' && lineas[y].indexOf('function')>=0){
-		if(/(function)(?=( |)(\w+))/.test(lineas[y]))
-			lineas[y]=lineas[y].replace('{','=>{').replace('function','var').replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=');
-		else
-			lineas[y]=lineas[y].replace('{','=>{').replace('function','');
-		
-	}else if(CFG.functions=='function' && lineas[y].indexOf('=>')>=0){ 
-		if(lineas[y].indexOf('(')>=0){
-			lineas[y]='function'+lineas[y];
-			lineas[y]=lineas[y].replace('=>','')
+	if(CFG.functions=='arrow' && ls[y].indexOf('function')>=0){
+		if(/(function)(?=( |)(\w+))/.test(ls[y]))
+			ls[y]=ls[y].replace('{','=>{').replace('function','var').replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=');
+		else ls[y]=ls[y].replace('{','=>{').replace('function','');
+	}else if(CFG.functions=='function' && ls[y].indexOf('=>')>=0){ 
+		if(ls[y].indexOf('(')>=0){
+			ls[y]='function'+ls[y];
+			ls[y]=ls[y].replace('=>','')
 		}else{
-			let param=lineas[y].substring(0, lineas[y].indexOf('=>'));
-			let b=lineas[y].substring(lineas[y].indexOf('=>'),lineas[y].length-1);
-			lineas[y]='function('+param+')'+b;
-			lineas[y]=lineas[y].replace('=>','{')
+			let param=ls[y].substring(0, ls[y].indexOf('=>'));
+			let b=ls[y].substring(ls[y].indexOf('=>'),ls[y].length-1);
+			ls[y]='function('+param+')'+b;
+			ls[y]=ls[y].replace('=>','{')
 		}
 	}
 let z=false,t=false,k=null;
-let ly=lineas[y].trim(), chars=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
+let ly=ls[y].trim(), ch=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
 cs(l,CM.r);
 
-for (var x=0; x<chars.length; x++){
+for(let x=0;x<ch.length;x++){
 
-	if(chars[x]=='(' && ly.indexOf('(')>0 ){	
+	if(ch[x]=='(' && ly.indexOf('(')>0 ){	
 		let a=ly.substring(0, x).split('').reverse().join('');
-		if(/[:= *+\-./(]{1}/.test(a))
-			a=a.substring(0,a.search(/[:= *+\-./(]{1}/));
+		if(/[:= *+\-./(}]{1}/.test(a)) a=a.substring(0,a.search(/[:= *+\-./(}]{1}/));
 		if(a.length>0){
 		a=a.split('').reverse().join('');
 		if(!WW.includes(a)&&!WWC.includes(a)) WWU.push(' '+a,a);
 		}
 	}
 
-	if(chars[x]==k){
+	if(ch[x]==k){
 		t=!t;
-		inn(vlt,inn(vlt)+chars[x]);
+		inn(vlt,inn(vlt)+ch[x]);
 		cs(vlt,CM.s);
 		if(CLR) clr(vlt,CM.s);
 		if(inn(vlt).length>50) cs(vlt,'CM_tl');
 		lstr+=onn(vlt);
 		k=null;
-	}else if(/["']{1}/g.test(chars[x])){
-		k=chars[x];
+	}else if(/["']{1}/g.test(ch[x])){
+		k=ch[x];
 		t=!t;
 		vlt=C(S);
-		inn(vlt, chars[x]);
+		inn(vlt, ch[x]);
 		cs(vlt,CM.s);
 		if(CLR) clr(vlt,CM.s);
 	}else if(!t){
-	  if(isNaN(chars[x])){
+	  if(isNaN(ch[x])){
 	  	if(z) lstr+=onn(vlt);
 	  	z=false;
-	  }else if(!isNaN(chars[x])&&/[%\|&=+\-/<>*?,:[\(]{1}/.test(chars[x-1])){
+	  }else if(!isNaN(ch[x])&&/[%\|&=+\-/<>*?,:[\(]{1}/.test(ch[x-1])){
 	   	z=true;
 	  	vlt=C(S);
 		cs(vlt,CM.n);
@@ -193,17 +163,17 @@ for (var x=0; x<chars.length; x++){
 	  } 
 	  
 	  if(!z){
-		if(chars[x]=='{') {
-			lstr+=chars[x];
+		if(ch[x]=='{') {
+			lstr+=ch[x];
 			cs(l,'CM_f'+i);
 			i++;
-		}else if(chars[x]=='}'){
+		}else if(ch[x]=='}'){
 			app(l,vl);
 			i--;
 			cs(l,'CM_f'+i);
-			lstr+=chars[x];
-		}else if(chars[x]=='='){
-			if(chars[x+1]=='>'){
+			lstr+=ch[x];
+		}else if(ch[x]=='='){
+			if(ch[x+1]=='>'){
 			 	x++; 
 			 	cs(vl,CM.w);
 			 	if(CLR) clr(vl,CM.w);
@@ -211,25 +181,25 @@ for (var x=0; x<chars.length; x++){
 			}else{ 
 				cs(vl, CM.x);
 				if(CLR) clr(vl,CM.x);
-				inn(vl, chars[x]);
+				inn(vl, ch[x]);
 			}
 			lstr+=onn(vl);
-		}else if(/[%\|&=+\-!/<>*?]{1}/.test(chars[x])){
+		}else if(/[%\|&+\-!/<>*?]{1}/.test(ch[x])){
 			cs(vl,CM.x);
 			if(CLR) clr(vl,CM.x)
-			inn(vl, chars[x]);
+			inn(vl, ch[x]);
 			lstr+=onn(vl);
 		}else{
-			lstr+=chars[x];
+			lstr+=ch[x];
 			cs(l,'CM_f'+i);
 		}
 	  }else{ 
 	  	cs(vlt, CM.n);
 	  	if(CLR) clr(vlt,CM.n);
-		inn(vlt, inn(vlt)+chars[x]);
+		inn(vlt, inn(vlt)+ch[x]);
 	  }
 	}else{
-		inn(vlt,inn(vlt)+chars[x]);
+		inn(vlt,inn(vlt)+ch[x]);
 		cs(vlt,CM.s);
 		if(CLR) clr(vlt,CM.s);
 	}
@@ -267,10 +237,11 @@ for (var x=0; x<chars.length; x++){
 				});
 			});
 	}
-//-----------------------------------------------
+	//-----------------------------------------------
+	
 	inn(l,lstr);
 	app(r,l);
-} // fin for lineas
+} // fin for ls
 return r;
 }
 //-------------------------------------------------------------------------------------------
@@ -309,8 +280,8 @@ if(t(J)==T.f){
 		inn(t,'"'+/\((.*)(?=(\)))/.exec(J.toString())[0].replace('(','')+'"');
 		inn(v,onn(ss)+'('+onn(t)+')');
 	}else{
-		inn(atr,' ')
-		inn(pp,' ')
+		inn(atr,' ');
+		inn(pp,' ');
 	}
 }else if(t(J)!=T.o || J===null || t(J)===undefined){
 	inn(pp,':');
@@ -328,15 +299,14 @@ if(t(J)==T.f){
 	inn(pp,(inn(atr)!='')?':[':'['); 
 	cs(pp,CM.l);
 	let J1=J;
-	for (var x = 0; x < J1.length; x++) {
+	for(let x = 0; x < J1.length; x++){
 	let v1=C(S);
 	cs(v1,CM.l);
-		if(t(J1[x])=='object'&&J1[x]!==null)
-			app(v, R(J1[x],x,'ia') );
+		if(t(J1[x])=='object'&&J1[x]!==null) app(v,R(J1[x],x,'ia'));
 		else{
 			let val=C(S);
 			cc=(t(J1[x])==T.s)?'"':'';
-			inn(val,cc+String(J1[x])+cc)
+			inn(val,cc+String(J1[x])+cc);
 			cs(val,CM[t(J1[x])]);
 			if(CLR) clr(val,CM[t(J1[x])]);
 			inn(v1, ((x!=J1.length-1)? ',':''));
@@ -357,10 +327,10 @@ if(t(J)==T.f){
 		let n=C(S), D1=C(S), f=C(S);
 		cs(n,CM.l);
 		cs(n,CM.wc);
-		if(CLR) clr(n,CM.wcl)
+		if(CLR) clr(n,CM.wcl);
 		inn(n,'new ');
 		cs(D1,CM.w);
-		if(CLR) clr(D1,CM.w)
+		if(CLR) clr(D1,CM.w);
 		inn(D1,'Date');
 		inn(dd,'"'+J.getFullYear() +'/'+(J.getMonth()+1)+'/'+J.getDate()+
 			((J.getHours())?' '+J.getHours()+':'+
@@ -388,7 +358,7 @@ if(t(J)==T.f){
 		cs(v2,CM.l);
 	}
 	inn(vv,'},');
-	cs(vv,CM.bk)
+	cs(vv,CM.bk);
 	app(v,vv);
   } 
 }
@@ -407,27 +377,25 @@ cs(all,'CM_all');
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
 app(all,st);
-if(CFG.font) all.style.fontFamily = CFG.font
-if(CLR.all) all.style.color = CLR.all
+if(CFG.font) all.style.fontFamily = CFG.font;
+if(CLR.all) all.style.color = CLR.all;
 
-for (key in OBJ) {
-		app(all,R(OBJ[key],key,isA(OBJ)));
-}
+for (key in OBJ) app(all,R(OBJ[key],key,isA(OBJ)));
 inn(fin,(isA(OBJ))?']':'}');
 cs(fin,CM.bk);
-app(all,fin)
+app(all,fin);
 
 if(CFG.index){
 let nros=C(S);
-cs(nros,'CM_nros')
-if(CLR.nros) nros.style.color = CLR.nros;
-for (var i = 1; i <= LINS ;i++) {
+cs(nros,'CM_index');
+if(CLR.index) nros.style.color = CLR.index;
+for (let i = 1;i<=LINS;i++){
 	let aa=C(S);
-	inn(aa,i+'|')
-	app(nros,aa)
+	inn(aa,i+'|');
+	app(nros,aa);
 }
-all.style.marginLeft = '2em'
-app(all,nros)
+all.style.marginLeft = '2em';
+app(all,nros);
 }
 return all;
 }
