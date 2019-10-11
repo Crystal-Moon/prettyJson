@@ -27,12 +27,14 @@ const myObject={
 	vars45:345,
 	var12:'variable numerica',
 	funcion_comun: function(a=56,b,c){
-		class Rect {
-  			constructor(height, width) {
+		class Rect{
+  			constructor(height, width){
     		this.height = height;
     		this.width = width;
   			}
 		}
+		let r1=new Rect();
+		let r2= new Rect(234,145);
 		let var88=1234;
 		if(res>0){
 			a=10;
@@ -78,7 +80,7 @@ const myObject={
 		}else if(res<0){
 			param='texto'
 		}else abc(param)
-		res=res.concat(abc());
+		res=res.concat(abc(666));
 		res=res.concat(abc(abc('text',123,res)));
 		return res;
 	},

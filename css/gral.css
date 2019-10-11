@@ -7,7 +7,6 @@
 	a:'CM_a',
 	b:'CM_b',
 	r:'CM_r',
-	at:'CM_at',
 	v:'CM_v',
 
 */
@@ -22,7 +21,7 @@
 .CM_r{
 	display: flex;
 	flex-direction: row;
-	margin-left: 2em;
+	margin-left: 1em;
 }
 .CM_r1{
 	margin-left: 1em;
@@ -110,10 +109,10 @@ div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 .CM_v{
 	word-break: break-word;
 }
-.CM_f{
-	
-	
+.CM_tl{
+	flex: 1;
 }
+
 .CM_ff{
 	white-space: pre-wrap;
 	flex-direction: column;

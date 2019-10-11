@@ -1,27 +1,30 @@
 /*
 
 	c:'CM_com',	//comunes
+	k:'CM_key',
 	s:'CM_txt',
 	n:'CM_num',
 	z:'CM_null',
-	b:'CM_bool',
 	u:'CM_udf',
-	ob:'CM_obj',
 	x:'CM_x',
 	w:'CM_w',
 	wc:'CM_wc',
 	wu:'CM_wu',
 	ags:'CM_ags',
 
-	"string":"txt",
-	"number":"num",
-	"boolean":"bul",
-	"undefined":"und",
-	"object":"nul",
+	"string":"CM_txt",
+	"number":"CM_num",
+	"boolean":"CM_bool",
+	"undefined":"CM_udf",
+	"object":"CM_null",
 
 */
 
 /* colores */
+.CM_all{
+	color: black;
+}
+
 .CM_wu{
 	color: green;
 }
@@ -33,35 +36,33 @@
 	font-style: italic;
 }
 
-.CM_txt .CM_w, .CM_txt .CM_wc{
+.CM_txt .CM_w, .CM_txt .CM_wc, .CM_txt .CM_wu{
 	color: inherit;
 }
 .CM_com{
-	color: black;
+	color: inherit;
 }
-.CM_at{
+.CM_key{
 	color: inherit;
 }
 .CM_txt{
-	color: #d08804;
+	color: #d68b03;
 /*	flex: 1; */
     word-break: break-word;
 }
 .CM_ags{
-	color: #d64f37;
+	color: #7a8c1b;
 	font-style: italic;
 }
-.CM_tl{
-	flex: 1;
-}
+
 .CM_num{
 	color: #a272f7;
 }
 .CM_bool{
-	color: green;
+	color: #0489c5;
 }
-.CM_null{
-	color: red;
+.CM_null, .CM_udf{
+	color: #cc0404;
 }
 
 .CM_x{
