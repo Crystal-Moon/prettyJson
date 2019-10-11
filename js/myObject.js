@@ -72,7 +72,7 @@ const myObject={
 		function abc(){
 			return 'Hola';
 		}
-		const variable_con_reservas="probando palabras reservadas var let const default."
+		const variable_con_reservas="probando palabras reservadas varletconst default."
 		let res= param/2;
 		if(res>0){
 			param=10;

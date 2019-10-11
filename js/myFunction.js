@@ -1,18 +1,32 @@
 const pruebas=document.getElementById('pruebas');
 const MYCONFIG={
 	functions: false, //'arrow', 'function', null, se pone tal cual esta
-	noJson: false, //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
+	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
 	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
-	comillas: true, //true, false //default false
+	comillas: false, //true, false //default false
 	index: true, //nueros del costado, true o false 
 	//allow: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
 	allow: null,	//SOLO TEXTOS de key
 	indent:null, 	//cantidad de saltos desde la izq
 	font:null 		//'"Inconsolata", monospace' ejemplo
 }
+const MYCOLOR={
+	all: 'green',
+	string: 'yellow',
+	number: 'blue',
+	boolean: 'blue',
+	nulos: 'red',
+	undef: 'red',
+	key: 'brown',
+	maths: 'violet',
+	words: 'lime',
+	words_ctrl: 'pink',
+	words_user: 'red',
+	args: 'orange'
+}
 
-
-function prittyJson(OBJ,CFG={},COLOR){
+function prittyJson(OBJ,CFG={},CLR={}){
+	console.log('CLR',CLR)
 let LINS=1;
 /*
 let CFG=(CONFIG)?{
@@ -30,6 +44,23 @@ WW=['var','let','const','class','console.log','function','extends','import','exp
 
 C = e=>document.createElement(e), 
 cs = (e,c)=>{e.classList.add(c);}, 
+clr = (e,css)=>{
+	let c='';
+	switch (css) {
+	case CM.s:c=CLR.string;break;
+	case CM.n:c=CLR.number;break;
+	case CM.b:c=CLR.boolean;break;
+	case CM.u:c=CLR.undef;break;
+	case CM.x:c=CLR.maths;break;
+	case CM.z:c=CLR.nulos;break;
+	case CM.k:c=CLR.key;break;
+	case CM.w:c=CLR.words;break;
+	case CM.wc:c=CLR.words_ctrl;break;
+	case CM.wu:c=CLR.words_user;break;
+	case CM.ags:c=CLR.args;break;
+	}
+	if(c) e.style.color=c;
+},
 app = (e,n)=>{e.appendChild(n);}, 
 inn = (e,a)=>(a)?e.innerHTML=a:e.innerHTML,
 onn = e=>e.outerHTML, 
@@ -37,8 +68,16 @@ RW=(s,w,css)=>{
 	let vl=C(S);
 	cs(vl,CM.l);
 	cs(vl,css);
+	if(CLR){
+/*	switch (css) {
+	case CM.w:if(CLR.words) clr(vl,CLR.words);break;
+	case CM.wc:if(CLR.words_ctrl) clr(vl,CLR.words_ctrl);break;
+	case CM.wu:if(CLR.words_user) clr(vl,CLR.words_user);break;
+	} */
+	clr(vl,css)
+	}
 	inn(vl,w);
-	s=s.replace(new RegExp('('+w+')(?!\\w+)','g'),vl.outerHTML);
+	s=s.replace(new RegExp('('+w+')(?!\\w+)','g'),onn(vl));
 	return s;
 },
 S='span', 
@@ -52,7 +91,7 @@ T={
 	o:'object',
 	f:'function',
 	sy:'symbol',
-	d:'Date'
+	//d:'Date'
 
 },//string, number, undefined, boolean, object,
 CM={
@@ -62,13 +101,14 @@ CM={
 //	no:'CM_no',
 	o:'CM_o',
 	a:'CM_a',
-	b:'CM_b',
+	bk:'CM_b',
 	r:'CM_r',
 	
 	v:'CM_v',
 
 	//c:'CM_com',	//comunes
 	s:'CM_txt',
+	b:'CM_bool',
 	n:'CM_num',
 	z:'CM_null',
 	u:'CM_udf',
@@ -85,6 +125,23 @@ CM={
 	"undefined":"CM_udf",
 	"object":"CM_null",
 }, 
+/*
+colores para usuario: objeto
+CLR={
+	all: ''
+	string: ''
+	number: ''
+	boolean: ''
+	nulos: ''
+	undef: ''
+	key: ''
+	maths: ''
+	words: ''
+	words_ctrl: ''
+	words_user: ''
+	args: ''
+}
+*/
 PT={
 	g:'http://localhost/pritty/css/gral.css',
 	c:'http://localhost/pritty/css/color.css'
@@ -92,9 +149,12 @@ PT={
 t = e=>typeof e,
 isA = e=>Array.isArray(e);
 
+let UCOLOR=(t(CLR)==T.s)?CLR:undefined;
+
+
 //-----------------------------------------------------------------
 const cargarCSS=(userSheet=PT.c)=>{ //ruta completa de mi archivo server
-
+console.log('userSheet',userSheet)
 if(document.createStyleSheet) {
 	console.log('IE!!!')
   	document.createStyleSheet(PT.g,0);
@@ -206,6 +266,8 @@ let vl=C(S);
 		t=!t;
 		inn(vlt,inn(vlt)+chars[x])
 		cs(vlt,CM.s)	//color
+		if(CLR) clr(vlt,CM.s)
+			console.log(CLR.string)
 		if(inn(vlt).length>50) cs(vlt,'CM_tl')
 		lstr+=onn(vlt);
 		k=null;
@@ -216,6 +278,7 @@ let vl=C(S);
 		//vlt.id='vlt';
 		inn(vlt, chars[x])
 		cs(vlt,CM.s)	//color
+		if(CLR) clr(vlt,CM.s)
 	}else if(!t){
 	  if(isNaN(chars[x])){
 	  	if(z) lstr+=onn(vlt);
@@ -224,6 +287,7 @@ let vl=C(S);
 	   		z=true;
 	  	 vlt=C(S)
 		 cs(vlt,CM.n)	//color
+		 if(CLR) clr(vlt,CM.n)
 	  } 
 	  
 	  if(!z){
@@ -244,9 +308,11 @@ let vl=C(S);
 			if(chars[x+1]=='>'){
 			 	x++; 
 			 	cs(vl,CM.w); 	//color
+			 	if(CLR) clr(vl,CM.w)
 		 		inn(vl, '=>')
 			}else{ 
 				cs(vl, CM.x);	//color
+				if(CLR) clr(vl,CM.x)
 				inn(vl, chars[x]);
 			}
 			lstr+=onn(vl);
@@ -254,6 +320,7 @@ let vl=C(S);
 		}else if(/[%\|&=+\-!/<>*?]{1}/.test(chars[x])){	//let vl=C(S);
 			//vl=C(S)
 			cs(vl,CM.x);	//color
+			if(CLR) clr(vl,CM.x)
 			inn(vl, chars[x]);
 			//app(l,vl);
 			lstr+=onn(vl);
@@ -263,12 +330,14 @@ let vl=C(S);
 		}
 	  }else{ 
 	  	cs(vlt, CM.n);	//color
+	  	if(CLR) clr(vlt,CM.n)
 		inn(vlt, inn(vlt)+chars[x]);
 	  }
 
 	}else{
 		inn(vlt,inn(vlt)+chars[x])
 		cs(vlt,CM.s)	//color
+		if(CLR) clr(vlt,CM.s)
 	}
 
 	} //-- fin for character
@@ -356,6 +425,7 @@ let vl=C(S);
 			inn(vl1,p)
 		//console.log('p',p)
 			cs(vl1,CM.ags)	//color
+			if(CLR) clr(vl1,CM.ags)
 
 	//	console.log('onn vl1',onn(vl1))
 			lstr=lstr.replace(new RegExp('('+p+')(?!\\w+)'), onn(vl1))
@@ -412,6 +482,7 @@ inn(atr,(!ia)?cc+k+cc:'');
 
 
 cs(atr,CM.k);	//color
+if(CLR) clr(atr,CM.k)
 
 cs(v,CM.v);
 //cs(vv,CM.c);	//clor
@@ -438,7 +509,9 @@ if(t(J)==T.f){
 		inn(pp,':');
 		let ss=C(S), t=C(S);
 		cs(ss,CM.w);	//color
+		if(CLR) clr(ss,CM.w)
 		cs(t,CM.s);		//color
+		if(CLR) clr(t,CM.s)
 		inn(ss,'Symbol');
 
 		//var result = /(?<=(\())(.*)(?=(\)))/.exec(J.toString())[0];
@@ -457,6 +530,15 @@ if(t(J)==T.f){
 	if(t(J)==T.n&&/(Infinity)|(NaN)/.test(String(J))&&!/(all)|(object)/.test(CFG.noJson)) J=null;
 	inn(val, cc+String(J)+cc);
 	cs(val, CM[t(J)] );
+	if(CLR){ clr(val,CM[t(J)])
+		/*switch (t(J)) {
+		case T.s:if(CLR.string) clr(val,CLR.string);break;
+		case T.n:if(CLR.number) clr(val,CLR.number);break;
+		case T.b:if(CLR.boolean) clr(val,CLR.boolean);break;
+		case T.u:if(CLR.undef) clr(val,CLR.undef);break;
+		case T.o:if(CLR.nulos) clr(val,CLR.nulos);break;
+		}*/
+	}
 	app(v,val);
 	cs(vv,CM.l);
 	inn(vv,',');
@@ -485,6 +567,16 @@ if(t(J)==T.f){
 			cc=(t(J1[x])==T.s)?'"':'';
 			inn(val,cc+String(J1[x])+cc)
 			cs(val, CM[ t(J1[x]) ] );
+
+			if(CLR){ clr(val,CM[ t(J1[x]) ])
+		/*switch (t(J1[x])) {
+		case T.s:if(CLR.string) clr(val,CLR.string);break;
+		case T.n:if(CLR.number) clr(val,CLR.number);break;
+		case T.b:if(CLR.boolean) clr(val,CLR.boolean);break;
+		case T.u:if(CLR.undef) clr(val,CLR.undef);break;
+		case T.o:if(CLR.nulos) clr(val,CLR.nulos);break;
+		}*/
+	}
 			inn(v1, ((x!=J1.length-1)? ',':''));
 			app(v,val);
 			app(v,v1);
@@ -503,6 +595,7 @@ app(v,vv);
   	inn(pp,':');
   	let dd=C(S);
   	cs(dd,CM.s);	//color
+  	if(CLR) clr(dd,CM.s)
   	if(/(all)|(object)/.test(CFG.noJson)){
 	
 	//if(/(all)|(date)/.test(CFG.noJson)) app(v ,valorIlegal(J,t(J)) );
@@ -510,8 +603,10 @@ app(v,vv);
 		let n=C(S), D1=C(S), f=C(S);
 		cs(n,CM.l);
 		cs(n,CM.wc);	//color
+		if(CLR) clr(n,CM.wcl)
 		inn(n,'new ');
 		cs(D1,CM.w);	//color
+		if(CLR) clr(D1,CM.w)
 		inn(D1,'Date');
 		//cs(f,CM.c);		//clor
 
@@ -542,7 +637,7 @@ app(v,val);
 	cs(r,CM.o); 
 	//inn(pp,':{');
 	inn(pp,(inn(atr)!='')?':{':'{'); 
-	cs(pp,CM.b);
+	cs(pp,CM.bk);
 
 let oo=J, e=0;
 	for (kk in oo) {
@@ -564,7 +659,7 @@ let oo=J, e=0;
 inn(vv,'},');
 //app(v,val);
 	//	inn(vv, (Object.keys(oo).length-1!=e)? ',':'},');
-		cs(vv,CM.b)
+		cs(vv,CM.bk)
 	app(v,vv);
   } 
 }
@@ -590,17 +685,18 @@ app(r,v);
 
 } // fin de mySuoer alias R-------------------------------------------------------------------
 
-cargarCSS(COLOR);
+cargarCSS(UCOLOR);
 
 
 let all=C(D);
 cs(all,'CM_all');
 let st=C(S);
 inn(st,(isA(OBJ))?'[':'{');
-cs(st,CM.b);
+cs(st,CM.bk);
 //cs(st,CM.c);	//clor
 app(all,st);
 if(CFG.font) all.style.fontFamily = CFG.font
+if(CLR.all) all.style.color = CLR.all
 
 
 
@@ -612,7 +708,7 @@ for (key in OBJ) {
 	let fin=C(S);
 inn(fin,(Array.isArray(OBJ))?']':'}')
 //cs(fin,CM.c);	//clor
-cs(fin,CM.b);
+cs(fin,CM.bk);
 app(all,fin)
 
 if(CFG.index){
