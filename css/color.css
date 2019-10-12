@@ -12,10 +12,18 @@
 	color: #088ac5;
 	font-style: italic;
 }
-.CM_txt .CM_w, .CM_txt .CM_wc, .CM_txt .CM_wu{
+.CM_txt{
+	color: #d68b03;
+    word-break: break-word;
+}
+/*.CM_txt .CM_w, .CM_txt .CM_wc, .CM_txt .CM_wu{*/
+.CM_txt *{
 	color: inherit;
 }
 .CM_com{
+	color: grey;
+}
+.CM_com *{
 	color: inherit;
 }
 .CM_key{

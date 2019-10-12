@@ -12,6 +12,7 @@ cs = (e,c)=>{e.classList.add(c)},
 clr = (e,css)=>{
 	let c='';
 	switch (css) {
+	case CM.c:c=CLR.comment;break;
 	case CM.s:c=CLR.string;break;
 	case CM.n:c=CLR.number;break;
 	case CM.b:c=CLR.boolean;break;
@@ -35,7 +36,7 @@ RW=(s,w,css)=>{
 	cs(vl,css);
 	if(CLR) clr(vl,css);
 	inn(vl,w);
-	s=s.replace(new RegExp('('+w+')(?!\\w+)','g'),onn(vl));
+	s=s.replace(new RegExp('^('+w+')|(){0}('+w+')(?!\\w+)','g'),onn(vl));
 	return s;
 },
 S='span', 
@@ -59,6 +60,7 @@ CM={
 	r:'CM_r',
 	v:'CM_v',
 
+	c:'CM_com',
 	s:'CM_txt',
 	b:'CM_bool',
 	n:'CM_num',
@@ -123,6 +125,7 @@ for(let y=0;y<ls.length;y++){
 	}
 let z=false,t=false,k=null;
 let ly=ls[y].trim(), ch=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
+let q=false;
 cs(l,CM.r);
 
 for(let x=0;x<ch.length;x++){
@@ -135,6 +138,19 @@ for(let x=0;x<ch.length;x++){
 		if(!WW.includes(a)&&!WWC.includes(a)) WWU.push(' '+a,a);
 		}
 	}
+
+	if(ch[x]=='/'&&ch[x+1]=='/'&&!t){
+		q=true;
+		let a=ch.slice(x).join('');
+		x=ch.length;
+		vlt=C(S);
+		if(a.length>50) cs(vlt,'CM_tl');
+		inn(vlt,a);
+		cs(vlt,CM.c);
+		if(CLR) clr(vlt,CM.c)
+		lstr+=onn(vlt);
+		cs(l,'CM_f'+i);
+	}else{
 
 	if(ch[x]==k){
 		t=!t;
@@ -194,28 +210,26 @@ for(let x=0;x<ch.length;x++){
 			cs(l,'CM_f'+i);
 		}
 	  }else{ 
-	  	cs(vlt, CM.n);
-	  	if(CLR) clr(vlt,CM.n);
 		inn(vlt, inn(vlt)+ch[x]);
 	  }
 	}else{
 		inn(vlt,inn(vlt)+ch[x]);
-		cs(vlt,CM.s);
-		if(CLR) clr(vlt,CM.s);
 	}
+	} //de q
 } //-- fin for character
+q=false;
 
 	WWU.forEach((w)=>{
-	if(lstr.search(new RegExp('(([.]|[ ]|){1})+('+w+')+(([:({]|[ ]){1})','g'))>=0)
+	if(lstr.search(new RegExp('^('+w+'){1}|(([.]|[ ]|){1})+('+w+')+(([:({]|[ ]){1})','g'))>=0)
 			lstr=RW(lstr,w,CM.wu)
 	});
 
 	WWC.forEach((w)=>{
-	if(lstr.search(new RegExp('(([}.]|[ ]|){1}){1}('+w+')+((|[;:{(.]|[ ]){1})','g'))>=0)
+	if(lstr.search(new RegExp('^('+w+'){1}|(([}.(]|[ ]|){1}){1}('+w+')+((|[;:{(.]|[ ]){1})','g'))>=0)
 			lstr=RW(lstr,w,CM.wc)
 	});
 	WW.forEach((w)=>{
-	if(lstr.search(new RegExp('(([=.]|[ ]|){1}){1}('+w+')+(([;{(=.]([^"])|[ ]){1})','g'))>=0)
+	if(lstr.search(new RegExp('^('+w+'){1}|(([=.( ]){1}){1}('+w+')+(([;{(=.]([^"])|[ ]){1})','g'))>=0)
 			lstr=RW(lstr,w,CM.w)
 	});
 

@@ -1,3 +1,31 @@
+const p=document.getElementById('pruebas');
+const MYCONFIG={
+	functions: 'function', //'arrow', 'function', null, se pone tal cual esta
+	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
+	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
+	comillas: false, //true, false //default false
+	index: true, //nueros del costado, true o false 
+	//allow: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
+	allow: null,	//SOLO TEXTOS de key
+	indent:null, 	//cantidad de saltos desde la izq
+	font:null 		//'"Inconsolata", monospace' ejemplo
+}
+const MYCOLOR={
+	all: 'skyblue',
+	string: 'yellow',
+	number: '#f75db0',
+	boolean: '#f75db0',
+	nulos: 'red',
+	undef: 'red',
+	key: 'brown',
+	maths: 'blue',
+	words: 'lime',
+	words_ctrl: 'pink',
+	words_user: 'red',
+	args: 'orange',
+	index: 'pink',
+	comment: 'tomato'
+}
 
 const myObject={
 	
@@ -17,8 +45,8 @@ const myObject={
 		num1:52344,
 		array_in:["hola",5436456,"soy","un",479275,"array",242,567,11,"mixto","en array_in del objeto"]
 	},
-	objeto_symbol: Symbol('foo (algo1234)Name'),
-	objeto_date: new Date(),
+	objeto_symbol: Symbol('foo (algo1234)Name'),//comentario
+	objeto_date: new Date(), //comentario
 	valor_null: null,
 	valor_undefined:undefined,
 	"booleann": true,
@@ -33,6 +61,9 @@ const myObject={
     		this.width = width;
   			}
 		}
+		do{
+			b=b+c+444;
+		}while(a>90)
 		let r1=new Rect();
 		let r2= new Rect(234,145);
 		let var88=1234;
@@ -48,10 +79,10 @@ const myObject={
 			algo1234[i]=''
 		}
 
-		let res= a/2;
+		let res= a/2;	//comentario cn numeros 8593068
 		switch(abc()>99) {
 			case label_1:
-				let a=822;
+				let a=822;	//comentario con "texto!"
 				break;
 			default:
 				let b='texto'
@@ -60,11 +91,17 @@ const myObject={
 		return res;
 	},
 	funcion_arrow: (a='texto',b,c)=>{
-		const unaVariable_larga="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt voluptatem magnam, necessitatibus! Voluptatum officia non aliquid totam ducimus molestias, harum blanditiis, alias voluptatibus facere nisi quia quibusdam, sit sint ullam."
+		const unaVariable_larga="Lorem ipsum dolor //sit amet, consectetur adipisicing elit. Deserunt voluptatem magnam, necessitatibus! Voluptatum officia non aliquid totam ducimus molestias, harum blanditiis, alias voluptatibus facere nisi quia quibusdam, sit sint ullam."
 		let res= a+b+c;
 		if(res>0){
 			a=10;
 			res=b+c;
+		}
+		try {
+			//Lorem ipsum dolor //sit amet, consectetur adipisicing elit. Deserunt voluptatem magnam, necessitatibus! Voluptatum officia non aliquid totam ducimus molestias, harum blanditiis, alias voluptatibus facere nisi quia quibusdam, sit sint ullam."
+		} catch(e) {
+			//statements
+			console.log(e);
 		}
 		return res;
 	},
