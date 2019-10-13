@@ -1,6 +1,6 @@
 const p=document.getElementById('pruebas');
 const MYCONFIG={
-	functions: 'function', //'arrow', 'function', null, se pone tal cual esta
+	functions: 'arrow', //'arrow', 'function', null, se pone tal cual esta
 	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
 	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
 	comillas: false, //true, false //default false
@@ -15,16 +15,16 @@ const MYCOLOR={
 	string: 'yellow',
 	number: '#f75db0',
 	boolean: '#f75db0',
-	nulos: 'red',
-	undef: 'red',
-	key: 'brown',
-	maths: 'blue',
-	words: 'lime',
-	words_ctrl: 'pink',
-	words_user: 'red',
-	args: 'orange',
-	index: 'pink',
-	comment: 'tomato'
+	nulos: '#894723',
+	undef: '#850382',
+	key: '#775392',
+	maths: '#738944',
+	words: '#759267',
+	words_ctrl: '#775235',
+	words_user: '#721140',
+	args: 'yellow',
+	index: '#123689',
+	comment: '#478952'
 }
 
 const myObject={
@@ -203,12 +203,6 @@ https://medium.com/javascript-in-plain-english/how-to-use-stringify-and-parse-in
 https://www.dyn-web.com/tutorials/php-js/json/filter.php
 https://stackoverflow.com/questions/30280322/how-to-stringify-objects-through-jsons-replacer-function
 
-diferenciar entre object y array
-
-Array.isArray([1, 2, 3]);  // true
-Array.isArray({foo: 123}); // false
-Array.isArray('foobar');   // false
-Array.isArray(undefined);  // false
 
 generar una hoja de stylos css con javascript
 

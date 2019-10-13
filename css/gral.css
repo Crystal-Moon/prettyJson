@@ -92,7 +92,7 @@ div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
 	font-size: inherit;
     position: absolute;
     width: auto;
-    margin-left: -2.3em;
+    margin-left: -2em;
     flex-direction: column;
     display: flex;
     overflow: hidden;

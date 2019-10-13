@@ -9,7 +9,7 @@ WW=['var','let','const','class','console.log','function','extends','import','exp
 
 C = e=>document.createElement(e), 
 cs = (e,c)=>{e.classList.add(c)}, 
-clr = (e,css)=>{
+cu = (e,css)=>{
 	let c='';
 	switch (css) {
 	case CM.c:c=CLR.comment;break;
@@ -34,14 +34,13 @@ RW=(s,w,css)=>{
 	let vl=C(S);
 	cs(vl,CM.l);
 	cs(vl,css);
-	if(CLR) clr(vl,css);
+	if(CLR) cu(vl,css);
 	inn(vl,w);
 	s=s.replace(new RegExp('^('+w+')|(){0}('+w+')(?!\\w+)','g'),onn(vl));
 	return s;
 },
 S='span', 
 D='div', 
-O='object', 
 T={
 	s:'string',
 	n:'number',
@@ -85,8 +84,8 @@ PT={
 t = e=>typeof e,
 isA = e=>Array.isArray(e);
 
-let LINS=1, UC=(t(CLR)==T.s)?CLR:undefined;
-//-------------------------------------------------------------------------------------------
+let L=1, UC=(t(CLR)==T.s)?CLR:undefined;
+
 const lcss=(userSheet=PT.c)=>{
 let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
 if(!y){
@@ -100,14 +99,14 @@ if(!y){
   	app(document.getElementsByTagName("head")[0],c2);
 }
 }
-//-------------------------------------------------------------------------------------------
-function esFuncion(fn){
+
+function isF(fn){
 let ls=fn.split('\n'), r=C(D), i=1;
 cs(r,CM.r);
 cs(r,'CM_ff');
 
 for(let y=0;y<ls.length;y++){
-	LINS+=2;
+	L+=2;
 	if(CFG.functions=='arrow' && ls[y].indexOf('function')>=0){
 		if(/(function)(?=( |)(\w+))/.test(ls[y]))
 			ls[y]=ls[y].replace('{','=>{').replace('function','var').replace(new RegExp('(\\w*)(?=\\()'),'$1'+'=');
@@ -115,17 +114,15 @@ for(let y=0;y<ls.length;y++){
 	}else if(CFG.functions=='function' && ls[y].indexOf('=>')>=0){ 
 		if(ls[y].indexOf('(')>=0){
 			ls[y]='function'+ls[y];
-			ls[y]=ls[y].replace('=>','')
+			ls[y]=ls[y].replace('=>','');
 		}else{
 			let param=ls[y].substring(0, ls[y].indexOf('=>'));
 			let b=ls[y].substring(ls[y].indexOf('=>'),ls[y].length-1);
 			ls[y]='function('+param+')'+b;
-			ls[y]=ls[y].replace('=>','{')
+			ls[y]=ls[y].replace('=>','{');
 		}
 	}
-let z=false,t=false,k=null;
-let ly=ls[y].trim(), ch=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
-let q=false;
+let z=false,t=false,k=null,q=false, ly=ls[y].trim(), ch=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
 cs(l,CM.r);
 
 for(let x=0;x<ch.length;x++){
@@ -147,7 +144,7 @@ for(let x=0;x<ch.length;x++){
 		if(a.length>50) cs(vlt,'CM_tl');
 		inn(vlt,a);
 		cs(vlt,CM.c);
-		if(CLR) clr(vlt,CM.c)
+		if(CLR) cu(vlt,CM.c);
 		lstr+=onn(vlt);
 		cs(l,'CM_f'+i);
 	}else{
@@ -156,7 +153,7 @@ for(let x=0;x<ch.length;x++){
 		t=!t;
 		inn(vlt,inn(vlt)+ch[x]);
 		cs(vlt,CM.s);
-		if(CLR) clr(vlt,CM.s);
+		if(CLR) cu(vlt,CM.s);
 		if(inn(vlt).length>50) cs(vlt,'CM_tl');
 		lstr+=onn(vlt);
 		k=null;
@@ -166,7 +163,7 @@ for(let x=0;x<ch.length;x++){
 		vlt=C(S);
 		inn(vlt, ch[x]);
 		cs(vlt,CM.s);
-		if(CLR) clr(vlt,CM.s);
+		if(CLR) cu(vlt,CM.s);
 	}else if(!t){
 	  if(isNaN(ch[x])){
 	  	if(z) lstr+=onn(vlt);
@@ -175,7 +172,7 @@ for(let x=0;x<ch.length;x++){
 	   	z=true;
 	  	vlt=C(S);
 		cs(vlt,CM.n);
-		if(CLR) clr(vlt,CM.n);
+		if(CLR) cu(vlt,CM.n);
 	  } 
 	  
 	  if(!z){
@@ -192,32 +189,44 @@ for(let x=0;x<ch.length;x++){
 			if(ch[x+1]=='>'){
 			 	x++; 
 			 	cs(vl,CM.w);
-			 	if(CLR) clr(vl,CM.w);
+			 	if(CLR) cu(vl,CM.w);
 		 		inn(vl,'=>');
 			}else{ 
 				cs(vl, CM.x);
-				if(CLR) clr(vl,CM.x);
+				if(CLR) cu(vl,CM.x);
 				inn(vl, ch[x]);
 			}
 			lstr+=onn(vl);
 		}else if(/[%\|&+\-!/<>*?]{1}/.test(ch[x])){
 			cs(vl,CM.x);
-			if(CLR) clr(vl,CM.x)
+			if(CLR) cu(vl,CM.x);
 			inn(vl, ch[x]);
 			lstr+=onn(vl);
 		}else{
 			lstr+=ch[x];
 			cs(l,'CM_f'+i);
 		}
-	  }else{ 
-		inn(vlt, inn(vlt)+ch[x]);
-	  }
-	}else{
-		inn(vlt,inn(vlt)+ch[x]);
+	  }else inn(vlt, inn(vlt)+ch[x]);
+	}else inn(vlt,inn(vlt)+ch[x]);
 	}
-	} //de q
-} //-- fin for character
+}
 q=false;
+
+	if((lstr.indexOf('=>')>0||lstr.indexOf('=&gt;')>0)||lstr.indexOf('function')>=0){
+	  let mm=lstr.match(/(\w*(?=(<)([^/])))|([\w, ]*)(?=(\)|,){1,2}(<|{))/g);
+	  if(mm) mm.forEach((m)=>{
+		let pr=m.match(/([\w]+)/g);
+		if(pr) pr.forEach((p)=>{
+			if(p){
+			  let vl1=C(S);
+			  inn(vl1,p);
+			  cs(vl1,CM.ags);
+			  if(CLR) cu(vl1,CM.ags);
+			  lstr=lstr.replace(new RegExp('('+p+')(?![\\w(]+)'), onn(vl1));
+			}
+		})
+	  })
+	}
 
 	WWU.forEach((w)=>{
 	if(lstr.search(new RegExp('^('+w+'){1}|(([.]|[ ]|){1})+('+w+')+(([:({]|[ ]){1})','g'))>=0)
@@ -232,67 +241,47 @@ q=false;
 	if(lstr.search(new RegExp('^('+w+'){1}|(([=.( ]){1}){1}('+w+')+(([;{(=.]([^"])|[ ]){1})','g'))>=0)
 			lstr=RW(lstr,w,CM.w)
 	});
-
-	//-------------------------------------- params bonito
-	
-
-	if((lstr.indexOf('=>')>0||lstr.indexOf('=&gt;')>0)||lstr.indexOf('function')>=0){
-	  let mm=lstr.match(/(\w*(?=(<)([^/])))|([\w, ]*)(?=(\)|,){1,2}(<|{))/g);
-		if(mm)
-	  		mm.forEach((m)=>{	
-			let pr=m.match(/([\w*]+)/g)
-			if(pr)
-				pr.forEach((p)=>{
-				let vl1=C(S);
-				inn(vl1,p);
-				cs(vl1,CM.ags);
-				if(CLR) clr(vl1,CM.ags)
-				lstr=lstr.replace(new RegExp('('+p+')(?!\\w+)'), onn(vl1))
-				});
-			});
-	}
-	//-----------------------------------------------
 	
 	inn(l,lstr);
 	app(r,l);
-} // fin for ls
+}
 return r;
 }
-//-------------------------------------------------------------------------------------------
+
 function R(obj,k,ia){
-LINS+=2;
+L+=2;
 let cc=(CFG.comillas)?'"':'', r=C(D), p=C(S), pp=C(S), atr=C(S), v=C(S), val=C(S), vv=C(S), J=obj;
 cs(r,CM.r);
-cs(r,'CM_r'+((CFG.indent>10)?10:CFG.indent))
+cs(r,'CM_r'+((CFG.indent>10)?10:CFG.indent));
 cs(p,CM.p);
 
 try{
-	if(CFG.allow) if(!CFG.allow.includes(k)&&!ia) throw 1;
+if(CFG.allow) if(!CFG.allow.includes(k)&&!ia) throw 1;
 
 inn(atr,(!ia)?cc+k+cc:'');
 cs(atr,CM.k);
-if(CLR) clr(atr,CM.k);
+if(CLR) cu(atr,CM.k);
 cs(v,CM.v);
 
 if(t(J)==T.f){
 	if(/(all)|(function)/.test(CFG.noJson)){ 
 		inn(pp,':');
-		app(v ,esFuncion(J.toString()));
+		app(v,isF(J.toString()));
 	}else{
-		inn(atr,' ')
-		inn(pp,' ')
+		inn(atr,' ');
+		inn(pp,' ');
 	}
 }else if (t(J)==T.sy) {
 	if(/(all)|(object)/.test(CFG.noJson)){ 
 		inn(pp,':');
 		let ss=C(S), t=C(S);
 		cs(ss,CM.w);
-		if(CLR) clr(ss,CM.w);
+		if(CLR) cu(ss,CM.w);
 		cs(t,CM.s);
-		if(CLR) clr(t,CM.s);
+		if(CLR) cu(t,CM.s);
 		inn(ss,'Symbol');
 		inn(t,'"'+/\((.*)(?=(\)))/.exec(J.toString())[0].replace('(','')+'"');
-		inn(v,onn(ss)+'('+onn(t)+')');
+		inn(v,onn(ss)+'('+onn(t)+'),');
 	}else{
 		inn(atr,' ');
 		inn(pp,' ');
@@ -303,7 +292,7 @@ if(t(J)==T.f){
 	if(t(J)==T.n&&/(Infinity)|(NaN)/.test(String(J))&&!/(all)|(object)/.test(CFG.noJson)) J=null;
 	inn(val,cc+String(J)+cc);
 	cs(val,CM[t(J)]);
-	if(CLR) clr(val,CM[t(J)]);
+	if(CLR) cu(val,CM[t(J)]);
 	app(v,val);
 	cs(vv,CM.l);
 	inn(vv,',');
@@ -316,13 +305,13 @@ if(t(J)==T.f){
 	for(let x = 0; x < J1.length; x++){
 	let v1=C(S);
 	cs(v1,CM.l);
-		if(t(J1[x])=='object'&&J1[x]!==null) app(v,R(J1[x],x,'ia'));
+		if(t(J1[x])==T.o&&J1[x]!==null) app(v,R(J1[x],x,'x'));
 		else{
 			let val=C(S);
 			cc=(t(J1[x])==T.s)?'"':'';
 			inn(val,cc+String(J1[x])+cc);
 			cs(val,CM[t(J1[x])]);
-			if(CLR) clr(val,CM[t(J1[x])]);
+			if(CLR) cu(val,CM[t(J1[x])]);
 			inn(v1, ((x!=J1.length-1)? ',':''));
 			app(v,val);
 			app(v,v1);
@@ -336,29 +325,27 @@ if(t(J)==T.f){
   	inn(pp,':');
   	let dd=C(S);
   	cs(dd,CM.s);
-  	if(CLR) clr(dd,CM.s);
+  	if(CLR) cu(dd,CM.s);
   	if(/(all)|(object)/.test(CFG.noJson)){
 		let n=C(S), D1=C(S), f=C(S);
 		cs(n,CM.l);
 		cs(n,CM.wc);
-		if(CLR) clr(n,CM.wcl);
+		if(CLR) cu(n,CM.wcl);
 		inn(n,'new ');
 		cs(D1,CM.w);
-		if(CLR) clr(D1,CM.w);
+		if(CLR) cu(D1,CM.w);
 		inn(D1,'Date');
-		inn(dd,'"'+J.getFullYear() +'/'+(J.getMonth()+1)+'/'+J.getDate()+
-			((J.getHours())?' '+J.getHours()+':'+
-				((J.getMinutes()<10)?'0'+J.getMinutes():J.getMinutes())+':'+
-			((J.getSeconds()<10)?'0'+J.getSeconds():J.getSeconds()) :'')+'"');
-		inn(f,'('+onn(dd)+'),');
+		inn(dd,'"'+J.getFullYear() +'/'+(J.getMonth()+1)+'/'+J.getDate()+((J.getHours())?' '+J.getHours()+':'+
+			((J.getMinutes()<10)?'0'+J.getMinutes():J.getMinutes())+':'+((J.getSeconds()<10)?'0'+J.getSeconds():J.getSeconds()):'')+'"');
+		inn(f,'('+onn(dd)+')');
 		app(val,n);
 		app(val,D1);
 		app(val,f);
 	}else{
 		inn(dd,'"'+J.toISOString()+'"');
 		val=dd;
-		inn(vv,',');	
 	}
+	inn(vv,',');
 	app(v,val);
 	app(v,vv);
   }catch{
@@ -382,7 +369,7 @@ app(r,p);
 app(r,v);		
 }catch(e){ if(e!=1) inn(r,e) 
 }finally{ return r }
-} // fin de mySuoer alias R-------------------------------------------------------------------
+}
 
 lcss(UC);
 
@@ -391,8 +378,8 @@ cs(all,'CM_all');
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
 app(all,st);
-if(CFG.font) all.style.fontFamily = CFG.font;
-if(CLR.all) all.style.color = CLR.all;
+if(CFG.font) all.style.fontFamily=CFG.font;
+if(CLR.all) all.style.color=CLR.all;
 
 for (key in OBJ) app(all,R(OBJ[key],key,isA(OBJ)));
 inn(fin,(isA(OBJ))?']':'}');
@@ -400,17 +387,16 @@ cs(fin,CM.bk);
 app(all,fin);
 
 if(CFG.index){
-let nros=C(S);
-cs(nros,'CM_index');
-if(CLR.index) nros.style.color = CLR.index;
-for (let i = 1;i<=LINS;i++){
-	let aa=C(S);
-	inn(aa,i+'|');
-	app(nros,aa);
+let nrs=C(S);
+cs(nrs,'CM_index');
+if(CLR.index) nrs.style.color = CLR.index;
+for (let x= 1;x<=L;x++){
+	let a=C(S);
+	inn(a,x+'|');
+	app(nrs,a);
 }
-all.style.marginLeft = '2em';
-app(all,nros);
+all.style.marginLeft='2em';
+app(all,nrs);
 }
 return all;
 }
-//--------------------------------------
