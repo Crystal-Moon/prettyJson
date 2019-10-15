@@ -27,7 +27,7 @@ cu = (e,css)=>{
 	}
 	if(c) e.style.color=c;
 },
-app = (e,n)=>{e.appendChild(n);}, 
+app = (e,n)=>{e.appendChild(n)}, 
 inn = (e,a)=>(a)?e.innerHTML=a:e.innerHTML,
 onn = e=>e.outerHTML, 
 RW=(s,w,css)=>{
@@ -75,18 +75,15 @@ CM={
 	"number":"CM_num",
 	"boolean":"CM_bool",
 	"undefined":"CM_udf",
-	"object":"CM_null",
+	"object":"CM_null"
 }, 
 PT={
 	g:'http://localhost/pritty/css/gral.css',
 	c:'http://localhost/pritty/css/color.css'
 }
 t = e=>typeof e,
-isA = e=>Array.isArray(e);
-
-let L=1, UC=(t(CLR)==T.s)?CLR:undefined;
-
-const lcss=(userSheet=PT.c)=>{
+isA = e=>Array.isArray(e),
+lcss=(userSheet=PT.c)=>{
 let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
 if(!y){
 	let c1=C('link'),c2=C('link');
@@ -98,7 +95,8 @@ if(!y){
   	c2.href=userSheet
   	app(document.getElementsByTagName("head")[0],c2);
 }
-}
+};
+let L=1, UC=(t(CLR)==T.s)?CLR:undefined;
 
 function isF(fn){
 let ls=fn.split('\n'), r=C(D), i=1;
