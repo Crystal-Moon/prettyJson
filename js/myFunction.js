@@ -1,3 +1,57 @@
+Array.prototype.includes=null;
+if (!Array.from) {
+  console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
+  Array.from = (function () {
+    var toStr = Object.prototype.toString;
+    var isC = function (fn) {
+      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+    };
+    var toint = function (v) {
+      var n = Number(v);
+      if (isNaN(n)) { return 0; }
+      if (n === 0 || !isFinite(n)) { return n; }
+      return (n > 0 ? 1 : -1) * Math.floor(Math.abs(n));
+    };
+    var maxSafeInteger = Math.pow(2, 53) - 1;
+    var toLength = function (v) {
+      var len = toint(v);
+      return Math.min(Math.max(len, 0), maxSafeInteger);
+    };
+    return function from(arrayLike/*, mapFn, thisArg */) {
+      var C = this;
+      var items = Object(arrayLike);
+      if (arrayLike == null) {
+        throw new TypeError('Array.from requires an array-like object - not null or undefined');
+      }
+      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+      var T;
+      if (typeof mapFn !== 'undefined') {
+        if (!isC(mapFn)) {
+          throw new TypeError('Array.from: when provided, the second argument must be a function');
+        }
+        if (arguments.length > 2) {
+          T = arguments[2];
+        }
+      }
+      var len = toLength(items.length);
+      var A = isC(C) ? Object(new C(len)) : new Array(len);
+      var k = 0;
+      var kValue;
+      while (k < len) {
+        kValue = items[k];
+        if (mapFn) {
+          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+        } else {
+          A[k] = kValue;
+        }
+        k += 1;
+      }
+      A.length = len;
+      return A;
+    };
+  }());
+}
+
 function prittyJson(OBJ,CFG={},CLR={}){
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ));
 
@@ -6,39 +60,6 @@ WWC=['if','else','return','async','await','switch','case','for','default','break
 	'true','false','with','private','long','short','try','catch','throw','new','do','while','finally','instanceof'],
 WW=['var','let','const','class','console.log','function','extends','import','export','debugger','super','this',
 	'typeof','void'],
-
-C = e=>document.createElement(e), 
-cs = (e,c)=>{e.classList.add(c)}, 
-cu = (e,css)=>{
-	let c='';
-	switch (css) {
-	case CM.c:c=CLR.comment;break;
-	case CM.s:c=CLR.string;break;
-	case CM.n:c=CLR.number;break;
-	case CM.b:c=CLR.boolean;break;
-	case CM.u:c=CLR.undef;break;
-	case CM.x:c=CLR.maths;break;
-	case CM.z:c=CLR.nulos;break;
-	case CM.k:c=CLR.key;break;
-	case CM.w:c=CLR.words;break;
-	case CM.wc:c=CLR.words_ctrl;break;
-	case CM.wu:c=CLR.words_user;break;
-	case CM.ags:c=CLR.args;break;
-	}
-	if(c) e.style.color=c;
-},
-app = (e,n)=>{e.appendChild(n)}, 
-inn = (e,a)=>(a)?e.innerHTML=a:e.innerHTML,
-onn = e=>e.outerHTML, 
-RW=(s,w,css)=>{
-	let vl=C(S);
-	cs(vl,CM.l);
-	cs(vl,css);
-	if(CLR) cu(vl,css);
-	inn(vl,w);
-	s=s.replace(new RegExp('^('+w+')|(){0}('+w+')(?!\\w+)','g'),onn(vl));
-	return s;
-},
 S='span', 
 D='div', 
 T={
@@ -80,9 +101,51 @@ CM={
 PT={
 	g:'http://localhost/pritty/css/gral.css',
 	c:'http://localhost/pritty/css/color.css'
-}
+},
+C = e=>document.createElement(e), 
+cs = (e,c)=>{e.classList.add(c)}, 
+cu = (e,css)=>{
+	let c='';
+	switch (css) {
+	case CM.c:c=CLR.comment;break;
+	case CM.s:c=CLR.string;break;
+	case CM.n:c=CLR.number;break;
+	case CM.b:c=CLR.boolean;break;
+	case CM.u:c=CLR.undef;break;
+	case CM.x:c=CLR.maths;break;
+	case CM.z:c=CLR.nulos;break;
+	case CM.k:c=CLR.key;break;
+	case CM.w:c=CLR.words;break;
+	case CM.wc:c=CLR.words_ctrl;break;
+	case CM.wu:c=CLR.words_user;break;
+	case CM.ags:c=CLR.args;break;
+	}
+	if(c) e.style.color=c;
+},
+incl=(a,k,f)=>(Array.prototype.includes)?a.includes(k,f):((a,k,f)=>{
+   let o=Object(a),len=o.length>>>0,n=f|0,j=Math.max(n>=0?n:len-Math.abs(n),0);
+   if(len===0) return false;
+   let sameValueZero=(x,y)=>x===y||(typeof x==='number'&& typeof y==='number'&&isNaN(x)&&isNaN(y));
+   while(j<len){
+    if(sameValueZero(o[j],k)) return true;
+    j++;
+   }
+   return false;
+})(a,k,f),
+app = (e,n)=>{e.appendChild(n)}, 
+inn = (e,a)=>(a)?e.innerHTML=a:e.innerHTML,
+onn = e=>e.outerHTML||((n)=>{let d=C(D),h;app(d,n.cloneNode(true));h=d.innerHTML;d=null;return h})(e),
+RW=(s,w,css)=>{
+	let vl=C(S);
+	cs(vl,CM.l);
+	cs(vl,css);
+	if(CLR) cu(vl,css);
+	inn(vl,w);
+	s=s.replace(new RegExp('^('+w+')|(){0}('+w+')(?!\\w+)','g'),onn(vl));
+	return s;
+},
 t = e=>typeof e,
-isA = e=>Array.isArray(e),
+isA = e=>(!Array.isArray)?((arg)=>Object.prototype.toString.call(arg)==='[object Array]')(e):Array.isArray(e),
 lcss=(userSheet=PT.c)=>{
 let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
 if(!y){
@@ -130,7 +193,7 @@ for(let x=0;x<ch.length;x++){
 		if(/[:= *+\-./(}]{1}/.test(a)) a=a.substring(0,a.search(/[:= *+\-./(}]{1}/));
 		if(a.length>0){
 		a=a.split('').reverse().join('');
-		if(!WW.includes(a)&&!WWC.includes(a)) WWU.push(' '+a,a);
+		if(!incl(WW,a)&&!incl(WWC,a)) WWU.push(' '+a,a);
 		}
 	}
 
@@ -248,13 +311,13 @@ return r;
 
 function R(obj,k,ia){
 L+=2;
-let cc=(CFG.comillas)?'"':'', r=C(D), p=C(S), pp=C(S), atr=C(S), v=C(S), val=C(S), vv=C(S), J=obj;
+let cc=(!CFG.comillas)?'"':'', r=C(D), p=C(S), pp=C(S), atr=C(S), v=C(S), val=C(S), vv=C(S), J=obj;
 cs(r,CM.r);
 cs(r,'CM_r'+((CFG.indent>10)?10:CFG.indent));
 cs(p,CM.p);
 
 try{
-if(CFG.allow) if(!CFG.allow.includes(k)&&!ia) throw 1;
+if(CFG.allow) if(!incl(CFG.allow,k)&&!ia) throw 1;
 
 inn(atr,(!ia)?cc+k+cc:'');
 cs(atr,CM.k);
