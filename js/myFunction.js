@@ -1,64 +1,47 @@
-Array.prototype.includes=null;
-if (!Array.from) {
+if(!Array.from){
   console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
-  Array.from = (function () {
-    var toStr = Object.prototype.toString;
-    var isC = function (fn) {
-      return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+  Array.from=(function(){
+    var toStr=Object.prototype.toString,
+    isC=(fn)=>typeof fn==='function'||toStr.call(fn)==='[object Function]',
+    toint=v=>{
+      var n=Number(v);
+      if(isNaN(n)) return 0;
+      if(n===0||!isFinite(n)) return n;
+      return (n>0?1:-1)*Math.floor(Math.abs(n));
+    },
+    maxSafe=Math.pow(2,53)-1,
+    toLength=v=>{
+      var len=toint(v);
+      return Math.min(Math.max(len, 0), maxSafe);
     };
-    var toint = function (v) {
-      var n = Number(v);
-      if (isNaN(n)) { return 0; }
-      if (n === 0 || !isFinite(n)) { return n; }
-      return (n > 0 ? 1 : -1) * Math.floor(Math.abs(n));
-    };
-    var maxSafeInteger = Math.pow(2, 53) - 1;
-    var toLength = function (v) {
-      var len = toint(v);
-      return Math.min(Math.max(len, 0), maxSafeInteger);
-    };
-    return function from(arrayLike/*, mapFn, thisArg */) {
-      var C = this;
-      var items = Object(arrayLike);
-      if (arrayLike == null) {
-        throw new TypeError('Array.from requires an array-like object - not null or undefined');
-      }
-      var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+    return function from(arrayLike/*, mapFn, thisArg */){
+      var C=this, itms=Object(arrayLike);
+      if(arrayLike==null) throw new TypeError('Array.from requires an array-like object - not null or undefined');
+      var mapFn=arguments.length>1?arguments[1]:void undefined;
       var T;
-      if (typeof mapFn !== 'undefined') {
-        if (!isC(mapFn)) {
-          throw new TypeError('Array.from: when provided, the second argument must be a function');
-        }
-        if (arguments.length > 2) {
-          T = arguments[2];
-        }
+      if(typeof mapFn!=='undefined'){
+        if(!isC(mapFn)) throw new TypeError('Array.from: when provided, the second argument must be a function');
+        if(arguments.length>2) T=arguments[2];
       }
-      var len = toLength(items.length);
-      var A = isC(C) ? Object(new C(len)) : new Array(len);
-      var k = 0;
-      var kValue;
-      while (k < len) {
-        kValue = items[k];
-        if (mapFn) {
-          A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
-        } else {
-          A[k] = kValue;
-        }
-        k += 1;
+      var len=toLength(itms.length), A=isC(C)?Object(new C(len)):new Array(len), k=0;
+      var kv;
+      while(k<len){
+        kv=itms[k];
+        A[k]=(mapFn)?(typeof T==='undefined'?mapFn(kv,k):mapFn.call(T,kv,k)):kv;
+        k++;
       }
-      A.length = len;
+      A.length=len;
       return A;
     };
   }());
 }
 
 function prittyJson(OBJ,CFG={},CLR={}){
-OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ));
-
+OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ,CFG.replacer));
 const WWU=[],
 WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null',
 	'true','false','with','private','long','short','try','catch','throw','new','do','while','finally','instanceof'],
-WW=['var','let','const','class','console.log','function','extends','import','export','debugger','super','this',
+WW=['var','let','const','class','function','extends','import','export','debugger','super','this',
 	'typeof','void'],
 S='span', 
 D='div', 
@@ -72,39 +55,39 @@ T={
 	sy:'symbol'
 },
 CM={
-	p:'CM_p',
-	l:'CM_l',
-	o:'CM_o',
-	a:'CM_a',
-	bk:'CM_b',
-	r:'CM_r',
-	v:'CM_v',
+	p:'CM-p',
+	l:'CM-l',
+	o:'CM-o',
+	a:'CM-a',
+	bk:'CM-b',
+	r:'CM-r',
+	v:'CM-v',
 
-	c:'CM_com',
-	s:'CM_txt',
-	b:'CM_bool',
-	n:'CM_num',
-	z:'CM_null',
-	u:'CM_udf',
-	k:'CM_key',
-	x:'CM_x',
-	w:'CM_w',
-	wc:'CM_wc',
-	wu:'CM_wu',
-	ags:'CM_ags',
-	"string":"CM_txt",
-	"number":"CM_num",
-	"boolean":"CM_bool",
-	"undefined":"CM_udf",
-	"object":"CM_null"
+	c:'CM-comm',
+	s:'CM-txt',
+	b:'CM-bool',
+	n:'CM-num',
+	z:'CM-null',
+	u:'CM-udf',
+	k:'CM-key',
+	x:'CM-x',
+	w:'CM-w',
+	wc:'CM-wc',
+	wu:'CM-wu',
+	ags:'CM-ags',
+	"string":"CM-txt",
+	"number":"CM-num",
+	"boolean":"CM-bool",
+	"undefined":"CM-udf",
+	"object":"CM-null"
 }, 
 PT={
 	g:'http://localhost/pritty/css/gral.css',
 	c:'http://localhost/pritty/css/color.css'
 },
-C = e=>document.createElement(e), 
-cs = (e,c)=>{e.classList.add(c)}, 
-cu = (e,css)=>{
+C=e=>document.createElement(e), 
+cs=(e,c)=>{e.classList.add(c)}, 
+cu=(e,css)=>{
 	let c='';
 	switch (css) {
 	case CM.c:c=CLR.comment;break;
@@ -112,8 +95,8 @@ cu = (e,css)=>{
 	case CM.n:c=CLR.number;break;
 	case CM.b:c=CLR.boolean;break;
 	case CM.u:c=CLR.undef;break;
-	case CM.x:c=CLR.maths;break;
-	case CM.z:c=CLR.nulos;break;
+	case CM.x:c=CLR.x;break;
+	case CM.z:c=CLR.null;break;
 	case CM.k:c=CLR.key;break;
 	case CM.w:c=CLR.words;break;
 	case CM.wc:c=CLR.words_ctrl;break;
@@ -125,16 +108,16 @@ cu = (e,css)=>{
 incl=(a,k,f)=>(Array.prototype.includes)?a.includes(k,f):((a,k,f)=>{
    let o=Object(a),len=o.length>>>0,n=f|0,j=Math.max(n>=0?n:len-Math.abs(n),0);
    if(len===0) return false;
-   let sameValueZero=(x,y)=>x===y||(typeof x==='number'&& typeof y==='number'&&isNaN(x)&&isNaN(y));
+   let same=(x,y)=>x===y||(typeof x==='number'&& typeof y==='number'&&isNaN(x)&&isNaN(y));
    while(j<len){
-    if(sameValueZero(o[j],k)) return true;
+    if(same(o[j],k)) return true;
     j++;
    }
    return false;
 })(a,k,f),
-app = (e,n)=>{e.appendChild(n)}, 
-inn = (e,a)=>(a)?e.innerHTML=a:e.innerHTML,
-onn = e=>e.outerHTML||((n)=>{let d=C(D),h;app(d,n.cloneNode(true));h=d.innerHTML;d=null;return h})(e),
+app=(e,n)=>{e.appendChild(n)}, 
+inn=(e,a)=>(a)?e.innerHTML=a:e.innerHTML,
+onn=e=>e.outerHTML||((n)=>{let d=C(D),h;app(d,n.cloneNode(true));h=d.innerHTML;d=null;return h})(e),
 RW=(s,w,css)=>{
 	let vl=C(S);
 	cs(vl,CM.l);
@@ -144,8 +127,8 @@ RW=(s,w,css)=>{
 	s=s.replace(new RegExp('^('+w+')|(){0}('+w+')(?!\\w+)','g'),onn(vl));
 	return s;
 },
-t = e=>typeof e,
-isA = e=>(!Array.isArray)?((arg)=>Object.prototype.toString.call(arg)==='[object Array]')(e):Array.isArray(e),
+t=e=>typeof e,
+isA=e=>(!Array.isArray)?((arg)=>Object.prototype.toString.call(arg)==='[object Array]')(e):Array.isArray(e),
 lcss=(userSheet=PT.c)=>{
 let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
 if(!y){
@@ -164,7 +147,7 @@ let L=1, UC=(t(CLR)==T.s)?CLR:undefined;
 function isF(fn){
 let ls=fn.split('\n'), r=C(D), i=1;
 cs(r,CM.r);
-cs(r,'CM_ff');
+cs(r,'CM-ff');
 
 for(let y=0;y<ls.length;y++){
 	L+=2;
@@ -202,12 +185,12 @@ for(let x=0;x<ch.length;x++){
 		let a=ch.slice(x).join('');
 		x=ch.length;
 		vlt=C(S);
-		if(a.length>50) cs(vlt,'CM_tl');
+		if(a.length>50) cs(vlt,'CM-tl');
 		inn(vlt,a);
 		cs(vlt,CM.c);
 		if(CLR) cu(vlt,CM.c);
 		lstr+=onn(vlt);
-		cs(l,'CM_f'+i);
+		cs(l,'CM-f'+i);
 	}else{
 
 	if(ch[x]==k){
@@ -215,7 +198,7 @@ for(let x=0;x<ch.length;x++){
 		inn(vlt,inn(vlt)+ch[x]);
 		cs(vlt,CM.s);
 		if(CLR) cu(vlt,CM.s);
-		if(inn(vlt).length>50) cs(vlt,'CM_tl');
+		if(inn(vlt).length>50) cs(vlt,'CM-tl');
 		lstr+=onn(vlt);
 		k=null;
 	}else if(/["']{1}/g.test(ch[x])){
@@ -239,12 +222,12 @@ for(let x=0;x<ch.length;x++){
 	  if(!z){
 		if(ch[x]=='{') {
 			lstr+=ch[x];
-			cs(l,'CM_f'+i);
+			cs(l,'CM-f'+i);
 			i++;
 		}else if(ch[x]=='}'){
 			app(l,vl);
 			i--;
-			cs(l,'CM_f'+i);
+			cs(l,'CM-f'+i);
 			lstr+=ch[x];
 		}else if(ch[x]=='='){
 			if(ch[x+1]=='>'){
@@ -265,7 +248,7 @@ for(let x=0;x<ch.length;x++){
 			lstr+=onn(vl);
 		}else{
 			lstr+=ch[x];
-			cs(l,'CM_f'+i);
+			cs(l,'CM-f'+i);
 		}
 	  }else inn(vlt, inn(vlt)+ch[x]);
 	}else inn(vlt,inn(vlt)+ch[x]);
@@ -274,20 +257,18 @@ for(let x=0;x<ch.length;x++){
 q=false;
 
 	if((lstr.indexOf('=>')>0||lstr.indexOf('=&gt;')>0)||lstr.indexOf('function')>=0){
-	  let mm=lstr.match(/(\w*(?=(<)([^/])))|([\w, ]*)(?=(\)|,){1,2}(<|{))/g);
-	  if(mm) mm.forEach((m)=>{
-		let pr=m.match(/([\w]+)/g);
-		if(pr) pr.forEach((p)=>{
-			if(p){
-			  let vl1=C(S);
-			  inn(vl1,p);
-			  cs(vl1,CM.ags);
-			  if(CLR) cu(vl1,CM.ags);
-			  lstr=lstr.replace(new RegExp('('+p+')(?![\\w(]+)'), onn(vl1));
-			}
-		})
-	  })
-	}
+	let mm=lstr.match(/(\w*(?=(<)([^/])))|([\w, ]*)(?=(\)|,){1,2}(<|{))/g);
+	if(mm) mm.forEach((m)=>{
+	let pr=m.match(/([\w]+)/g);
+	if(pr) pr.forEach((p)=>{
+		if(p){
+			let vl1=C(S);
+			inn(vl1,p);
+			cs(vl1,CM.ags);
+			if(CLR) cu(vl1,CM.ags);
+			lstr=lstr.replace(new RegExp('('+p+')(?![\\w(]+)'), onn(vl1));
+		}
+	})})}
 
 	WWU.forEach((w)=>{
 	if(lstr.search(new RegExp('^('+w+'){1}|(([.]|[ ]|){1})+('+w+')+(([:({]|[ ]){1})','g'))>=0)
@@ -313,12 +294,10 @@ function R(obj,k,ia){
 L+=2;
 let cc=(!CFG.comillas)?'"':'', r=C(D), p=C(S), pp=C(S), atr=C(S), v=C(S), val=C(S), vv=C(S), J=obj;
 cs(r,CM.r);
-cs(r,'CM_r'+((CFG.indent>10)?10:CFG.indent));
+cs(r,'CM-r'+((CFG.indent>10)?10:CFG.indent));
 cs(p,CM.p);
 
 try{
-if(CFG.allow) if(!incl(CFG.allow,k)&&!ia) throw 1;
-
 inn(atr,(!ia)?cc+k+cc:'');
 cs(atr,CM.k);
 if(CLR) cu(atr,CM.k);
@@ -435,7 +414,7 @@ app(r,v);
 lcss(UC);
 
 let all=C(D), st=C(S), fin=C(S);
-cs(all,'CM_all');
+cs(all,'CM-all');
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
 app(all,st);
@@ -449,7 +428,7 @@ app(all,fin);
 
 if(CFG.index){
 let nrs=C(S);
-cs(nrs,'CM_index');
+cs(nrs,'CM-index');
 if(CLR.index) nrs.style.color = CLR.index;
 for (let x= 1;x<=L;x++){
 	let a=C(S);

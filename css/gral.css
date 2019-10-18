@@ -1,94 +1,97 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i&display=swap');
-.CM_all{
+.CM-all{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Ubuntu Mono', monospace;
 	position: relative;
 	font-size: inherit;
 }
-.CM_r{
+.CM-r{
 	display: flex;
 	flex-direction: row;
 	margin-left: 1em;
 }
-.CM_r1{
+.CM-r1{
 	margin-left: 1em;
 }
-.CM_r2{
+.CM-r2{
 	margin-left: 2em;
 }
-.CM_r3{
+.CM-r3{
 	margin-left: 3em;
 }
-.CM_r4{
+.CM-r4{
 	margin-left: 4em;
 }
-.CM_r5{
+.CM-r5{
 	margin-left: 5em;
 }
-.CM_r6{
+.CM-r6{
 	margin-left: 6em;
 }
-.CM_r7{
+.CM-r7{
 	margin-left: 7em;
 }
-.CM_r8{
+.CM-r8{
 	margin-left: 8em;
 }
-.CM_r9{
+.CM-r9{
 	margin-left: 9em;
 }
-.CM_r10{
+.CM-r10{
 	margin-left: 10em;
 }
-div.CM_o{
+div.CM-o{
 	flex-direction: column;
 }
-div.CM_a div.CM_o {
+div.CM-a div.CM-o {
     margin-left: 0;
 }
-div.CM_a span.CM_v div.CM_a, div.CM_f span.CM_v div.CM_f{
+div.CM-a span.CM-v div.CM-a, div.CM-f span.CM-v div.CM-f{
 	margin-left: 0;
 }
-.CM_l{
+.CM-l{
 	display: inline;
 }
-.CM_b{
+.CM-b{
 	display: inline-block;
 }
-.CM_i{
-	font-style: italic;
-}
-.CM_p{
+.CM-p{
 	white-space: nowrap;
 }
-.CM_v{
-	word-break: break-word;
+.CM-v{
+	overflow-wrap: break-word;
 }
-.CM_tl{
+.CM-tl{
 	flex: 1;
 }
-.CM_ff{
+.CM-tl.CM-comm:before{
+	content: '/*';
+}
+.CM-tl.CM-comm:after{
+	content: '*/';
+}
+.CM-ff{
 	white-space: pre-wrap;
 	flex-direction: column;
 	margin-left: 0;
 }
-.CM_f1{
+.CM-f1{
 	margin-left: 0em;
 }
-.CM_f2{
+.CM-f2{
 	margin-left: 2em;
 }
-.CM_f3{
+.CM-f3{
 	margin-left: 4em;
 }
-.CM_f4{
+.CM-f4{
 	margin-left: 6em;
 }
-.CM_f5{
+.CM-f5{
 	margin-left: 8em;
 }
-.CM_index{
+.CM-index{
 	font-size: inherit;
     position: absolute;
     width: auto;

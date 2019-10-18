@@ -1,54 +1,49 @@
 
-.CM_all{
-	color: black;
+.CM-all{
+	color: #000;
 }
-.CM_wu{
-	color: green;
+.CM-wu{
+	color: #008000;
 }
-.CM_wc{
+.CM-wc{
 	color: #f75db0;
 }
-.CM_w{
+.CM-w{
 	color: #088ac5;
 	font-style: italic;
 }
-.CM_txt{
+.CM-txt{
 	color: #d68b03;
-    word-break: break-word;
+	overflow-wrap: break-word;
 }
-/*.CM_txt .CM_w, .CM_txt .CM_wc, .CM_txt .CM_wu{*/
-.CM_txt *{
+.CM-txt *{
 	color: inherit;
 }
-.CM_com{
-	color: grey;
+.CM-comm{
+	color: #333;
 }
-.CM_com *{
+.CM-comm *{
 	color: inherit;
 }
-.CM_key{
+.CM-key{
 	color: inherit;
 }
-.CM_txt{
-	color: #d68b03;
-    word-break: break-word;
-}
-.CM_ags{
+.CM-ags{
 	color: #7a8c1b;
 	font-style: italic;
 }
-.CM_num{
+.CM-num{
 	color: #a272f7;
 }
-.CM_bool{
-	color: #0489c5;
+.CM-bool{
+	color: #4a7e96;
 }
-.CM_null, .CM_udf{
+.CM-null, .CM-udf{
 	color: #cc0404;
 }
-.CM_x{
-	color: #e20202;
+.CM-x{
+	color: #f00;
 }
-.CM_index{
+.CM-index{
 	color: #444;
 }

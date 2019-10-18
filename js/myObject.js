@@ -1,12 +1,13 @@
 const p=document.getElementById('pruebas');
 const MYCONFIG={
-	functions: 'arrow', //'arrow', 'function', null, se pone tal cual esta
+	functions: false, //'arrow', 'function', null, se pone tal cual esta
 	noJson: 'all', //'all', 'function', 'date', 'symbol', null (se hace doble parseo)
 	//CONFIG.dateVar: 'myVar', // 'myVar' ()=>d.getDate / d.getMonth / d.getYear [date1, date2, date3, ...]
-	comillas: false, //true, false //default false
+	comillas: true, //true, false //default true
 	index: true, //nueros del costado, true o false 
-	//allow: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
-	allow: null,	//SOLO TEXTOS de key
+	//replacer: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
+	//replacer: [0,2,5],	//matris de keys permitidas
+	replacer: null,
 	indent:null, 	//cantidad de saltos desde la izq
 	font:null 		//'"Inconsolata", monospace' ejemplo
 }
@@ -15,10 +16,10 @@ const MYCOLOR={
 	string: 'yellow',
 	number: '#f75db0',
 	boolean: '#f75db0',
-	nulos: '#894723',
+	null: '#894723',
 	undef: '#850382',
 	key: '#775392',
-	maths: '#738944',
+	x: '#738944',
 	words: '#759267',
 	words_ctrl: '#775235',
 	words_user: '#721140',
@@ -187,6 +188,9 @@ let myArray=[
 ]
 
 /*
+emojis
+https://gist.github.com/rxaviers/7360908
+
 generalidades de json
 https://lenguajejs.com/p/javascript/caracteristicas/json
 
@@ -203,15 +207,11 @@ https://medium.com/javascript-in-plain-english/how-to-use-stringify-and-parse-in
 https://www.dyn-web.com/tutorials/php-js/json/filter.php
 https://stackoverflow.com/questions/30280322/how-to-stringify-objects-through-jsons-replacer-function
 
+https://github.com/ricval/Documentacion/blob/master/Markdown/daringfireball/syntax.md
 
-generar una hoja de stylos css con javascript
+compatibiliades
+https://caniuse.com/
 
-var style = document.createElement('style');
-style.type = 'text/css';
-style.innerHTML = '.cssClass { color: #F00; }';
-document.getElementsByTagName('head')[0].appendChild(style);
-
-document.getElementById('someElementId').className = 'cssClass';
-
-
+markdown
+https://joedicastro.com/pages/markdown.html
 */
