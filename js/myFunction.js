@@ -1,3 +1,4 @@
+(()=>{
 if(!Array.from){
   console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
   Array.from=(function(){
@@ -34,7 +35,22 @@ if(!Array.from){
       return A;
     };
   }());
+}})();
+(()=>{
+let y=Array.from(document.getElementsByTagName('link'));
+let c1=document.createElement('link'),c2=document.createElement('link');
+  	c1.rel='stylesheet';
+  	c1.href='http://localhost/pritty/css/gral.css';
+  	c2.rel='stylesheet';
+  	c2.href='http://localhost/pritty/css/color.css';
+if(!y){
+	document.getElementsByTagName("head")[0].appendChild(c1);
+	document.getElementsByTagName("head")[0].appendChild(c2);
+}else{	
+  	y[0].parentNode.insertBefore(c1, y[0]);
+  	y[0].parentNode.insertBefore(c2, y[0]);
 }
+})();
 
 function prittyJson(OBJ,CFG={},CLR={}){
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ,CFG.replacer));
@@ -74,7 +90,7 @@ CM={
 	w:'CM-w',
 	wc:'CM-wc',
 	wu:'CM-wu',
-	ags:'CM-ags',
+	args:'CM-args',
 	"string":"CM-txt",
 	"number":"CM-num",
 	"boolean":"CM-bool",
@@ -101,7 +117,7 @@ cu=(e,css)=>{
 	case CM.w:c=CLR.words;break;
 	case CM.wc:c=CLR.words_ctrl;break;
 	case CM.wu:c=CLR.words_user;break;
-	case CM.ags:c=CLR.args;break;
+	case CM.args:c=CLR.args;break;
 	}
 	if(c) e.style.color=c;
 },
@@ -128,21 +144,8 @@ RW=(s,w,css)=>{
 	return s;
 },
 t=e=>typeof e,
-isA=e=>(!Array.isArray)?((arg)=>Object.prototype.toString.call(arg)==='[object Array]')(e):Array.isArray(e),
-lcss=(userSheet=PT.c)=>{
-let y=Array.from(document.getElementsByTagName('link')).find((l)=>l.href == PT.g);
-if(!y){
-	let c1=C('link'),c2=C('link');
-  	c1.rel='stylesheet';
-  	c1.href=PT.g
-  	app(document.getElementsByTagName("head")[0],c1);
-
-  	c2.rel='stylesheet';
-  	c2.href=userSheet
-  	app(document.getElementsByTagName("head")[0],c2);
-}
-};
-let L=1, UC=(t(CLR)==T.s)?CLR:undefined;
+isA=e=>(!Array.isArray)?((arg)=>Object.prototype.toString.call(arg)==='[object Array]')(e):Array.isArray(e);
+let L=1;
 
 function isF(fn){
 let ls=fn.split('\n'), r=C(D), i=1;
@@ -264,8 +267,8 @@ q=false;
 		if(p){
 			let vl1=C(S);
 			inn(vl1,p);
-			cs(vl1,CM.ags);
-			if(CLR) cu(vl1,CM.ags);
+			cs(vl1,CM.args);
+			if(CLR) cu(vl1,CM.args);
 			lstr=lstr.replace(new RegExp('('+p+')(?![\\w(]+)'), onn(vl1));
 		}
 	})})}
@@ -410,8 +413,6 @@ app(r,v);
 }catch(e){ if(e!=1) inn(r,e) 
 }finally{ return r }
 }
-
-lcss(UC);
 
 let all=C(D), st=C(S), fin=C(S);
 cs(all,'CM-all');
