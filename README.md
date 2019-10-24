@@ -9,7 +9,7 @@ El método ´prettyJson´ presenta una manera de mostrar código agradable al oj
 ## Instalacion
 Incluya la etiqueta del script a continuación en su documento y llame al método `prettyJson()` enviando el objeto a parsear por parámetro
 ~~~
-<script src="https://crystal-moon.github.io/prettyJson/dist/prettyJson_v0.1.0.min.js"></script>
+<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.1.0.min.js"></script>
 ~~~
 
 ## Sintaxis
@@ -47,7 +47,7 @@ Puede copiar y ejecutar el siguiente ejemplo alterando el valor de `myobj` para 
 
 <p id="myCode"></p>
 
-<script src="https://crystal-moon.github.io/prettyJson/dist/prettyJson_v0.1.0.min.js"></script>
+<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.1.0.min.js"></script>
 <script>
 let myCode = document.querySelector('#myCode');
 let myobj = {
