@@ -1,8 +1,10 @@
+README.md
+README.md
 
 # PrettyJson
 _Llevando **stringify** a otro nivel_
 
-El método `prettyJson` presenta una manera de mostrar código agradable al ojo humano, listo para incrustar en un documento html.
+El método ´prettyJson´ presenta una manera de mostrar código agradable al ojo humano, listo para incrustar en un documento html.
 
 ## Instalacion
 Incluya la etiqueta del script a continuación en su documento y llame al método `prettyJson()` enviando el objeto a parsear por parámetro
@@ -63,7 +65,7 @@ myCode.appendChild(pretty);
 ```
 El resultado sera:
 
-![prettyJsonSimple](/opt/lampp/htdocs/pritty/prettyExample.png)
+![prettyJsonSimple](./prettyExample.png)
 
 Emmm... Bueno... hasta aqui nada nuevo, no? Se puede conseguir un resultado similar con `JSON.stringify()`, porque usar `prettyJson()`?
 
@@ -83,7 +85,7 @@ El simple `monospace` ya no va... Elije tu propia fuente unica y diferente! :gri
 ##### :bomb: A todo color!!
 Puedes elejir el color de cada tipo de valor, de operadores, hasta elejir el color de las palabras reservadas de Javascript. :art:
 
-_Consulta todas estas opciones y mas en los detalles del parámetro [**config**](js/readme.md)._
+_Consulta todas estas opciones y mas en los detalles del parámetro [**config**](./js/readme.md)._
 ___
 ##  Compatibilidad con navegadores
 

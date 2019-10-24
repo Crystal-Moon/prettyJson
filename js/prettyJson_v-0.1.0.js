@@ -1,57 +1,3 @@
-(()=>{
-if(!Array.from){
-  console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
-  Array.from=(function(){
-    var toStr=Object.prototype.toString,
-    isC=(fn)=>typeof fn==='function'||toStr.call(fn)==='[object Function]',
-    toint=v=>{
-      var n=Number(v);
-      if(isNaN(n)) return 0;
-      if(n===0||!isFinite(n)) return n;
-      return (n>0?1:-1)*Math.floor(Math.abs(n));
-    },
-    maxSafe=Math.pow(2,53)-1,
-    toLength=v=>{
-      var len=toint(v);
-      return Math.min(Math.max(len, 0), maxSafe);
-    };
-    return function from(arrayLike/*, mapFn, thisArg */){
-      var C=this, itms=Object(arrayLike);
-      if(arrayLike==null) throw new TypeError('Array.from requires an array-like object - not null or undefined');
-      var mapFn=arguments.length>1?arguments[1]:void undefined;
-      var T;
-      if(typeof mapFn!=='undefined'){
-        if(!isC(mapFn)) throw new TypeError('Array.from: when provided, the second argument must be a function');
-        if(arguments.length>2) T=arguments[2];
-      }
-      var len=toLength(itms.length), A=isC(C)?Object(new C(len)):new Array(len), k=0;
-      var kv;
-      while(k<len){
-        kv=itms[k];
-        A[k]=(mapFn)?(typeof T==='undefined'?mapFn(kv,k):mapFn.call(T,kv,k)):kv;
-        k++;
-      }
-      A.length=len;
-      return A;
-    };
-  }());
-}})();
-(()=>{
-let y=Array.from(document.getElementsByTagName('link'));
-let c1=document.createElement('link'),c2=document.createElement('link');
-  	c1.rel='stylesheet';
-  	c1.href='http://localhost/pritty/css/gral.css';
-  	c2.rel='stylesheet';
-  	c2.href='http://localhost/pritty/css/color.css';
-if(!y){
-	document.getElementsByTagName("head")[0].appendChild(c1);
-	document.getElementsByTagName("head")[0].appendChild(c2);
-}else{	
-  	y[0].parentNode.insertBefore(c1, y[0]);
-  	y[0].parentNode.insertBefore(c2, y[0]);
-}
-})();
-
 function prittyJson(OBJ,CFG={},CLR={}){
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ,CFG.replacer));
 const WWU=[],
@@ -170,7 +116,6 @@ for(let y=0;y<ls.length;y++){
 		}
 	}
 let z=false,t=false,k=null,q=false, ly=ls[y].trim(), ch=ly.split(''), lstr='', l=C(S), vlt=C(S), vl=C(S);
-cs(l,CM.r);
 
 for(let x=0;x<ch.length;x++){
 
@@ -212,7 +157,7 @@ for(let x=0;x<ch.length;x++){
 		cs(vlt,CM.s);
 		if(CLR) cu(vlt,CM.s);
 	}else if(!t){
-	  if(isNaN(ch[x])){
+	  if(isNaN(ch[x])||ch[x]===' '){
 	  	if(z) lstr+=onn(vlt);
 	  	z=false;
 	  }else if(!isNaN(ch[x])&&/[%\|&=+\-/<>*?,:[\(]{1}/.test(ch[x-1])){
@@ -297,7 +242,7 @@ function R(obj,k,ia){
 L+=2;
 let cc=(!CFG.comillas)?'"':'', r=C(D), p=C(S), pp=C(S), atr=C(S), v=C(S), val=C(S), vv=C(S), J=obj;
 cs(r,CM.r);
-cs(r,'CM-r'+((CFG.indent>10)?10:CFG.indent));
+if(CFG.indent) cs(r,'CM-r'+((CFG.indent>10)?10:CFG.indent));
 cs(p,CM.p);
 
 try{
@@ -441,3 +386,58 @@ app(all,nrs);
 }
 return all;
 }
+
+(()=>{
+if(!Array.from){
+  console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
+  Array.from=(function(){
+    var toStr=Object.prototype.toString,
+    isC=(fn)=>typeof fn==='function'||toStr.call(fn)==='[object Function]',
+    toint=v=>{
+      var n=Number(v);
+      if(isNaN(n)) return 0;
+      if(n===0||!isFinite(n)) return n;
+      return (n>0?1:-1)*Math.floor(Math.abs(n));
+    },
+    maxSafe=Math.pow(2,53)-1,
+    toLength=v=>{
+      var len=toint(v);
+      return Math.min(Math.max(len, 0), maxSafe);
+    };
+    return function from(arrayLike/*, mapFn, thisArg */){
+      var C=this, itms=Object(arrayLike);
+      if(arrayLike==null) throw new TypeError('Array.from requires an array-like object - not null or undefined');
+      var mapFn=arguments.length>1?arguments[1]:void undefined;
+      var T;
+      if(typeof mapFn!=='undefined'){
+        if(!isC(mapFn)) throw new TypeError('Array.from: when provided, the second argument must be a function');
+        if(arguments.length>2) T=arguments[2];
+      }
+      var len=toLength(itms.length), A=isC(C)?Object(new C(len)):new Array(len), k=0;
+      var kv;
+      while(k<len){
+        kv=itms[k];
+        A[k]=(mapFn)?(typeof T==='undefined'?mapFn(kv,k):mapFn.call(T,kv,k)):kv;
+        k++;
+      }
+      A.length=len;
+      return A;
+    };
+  }());
+}})();
+
+(()=>{
+let y=Array.from(document.getElementsByTagName('link'));
+let c1=document.createElement('link'),c2=document.createElement('link');
+  	c1.rel='stylesheet';
+  	c1.href='http://localhost/pritty/css/gral.css';
+  	c2.rel='stylesheet';
+  	c2.href='http://localhost/pritty/css/color.css';
+if(!y){
+	document.getElementsByTagName("head")[0].appendChild(c1);
+	document.getElementsByTagName("head")[0].appendChild(c2);
+}else{	
+  	y[0].parentNode.insertBefore(c1, y[0]);
+  	y[0].parentNode.insertBefore(c2, y[0]);
+}
+})();

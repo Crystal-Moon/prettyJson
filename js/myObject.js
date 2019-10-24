@@ -8,7 +8,7 @@ const MYCONFIG={
 	//replacer: ["valor_null","array_corto","array_largo","objeto_de_objetos"],	//matris de keys permitidas
 	//replacer: [0,2,5],	//matris de keys permitidas
 	replacer: null,
-	indent:null, 	//cantidad de saltos desde la izq
+	indent:undefined, 	//cantidad de saltos desde la izq
 	font:null 		//'"Inconsolata", monospace' ejemplo
 }
 const MYCOLOR={
@@ -215,3 +215,57 @@ https://caniuse.com/
 markdown
 https://joedicastro.com/pages/markdown.html
 */
+/**
+isNaN(NaN);          // true
+isNaN(1);            // false: 1 is a number
+isNaN(-2e-4);        // false: -2e-4 is a number (-0.0002) in scientific notation
+isNaN(Infinity);     // false: Infinity is a number
+isNaN(true);         // false: converted to 1, which is a number
+isNaN(false);        // false: converted to 0, which is a number
+isNaN(null);         // false: converted to 0, which is a number
+isNaN("");           // false: converted to 0, which is a number
+isNaN(" ");          // false: converted to 0, which is a number
+isNaN("45.3");       // false: string representing a number, converted to 45.3
+isNaN("1.2e3");      // false: string representing a number, converted to 1.2e3
+isNaN("Infinity");   // false: string representing a number, converted to Infinity
+isNaN(new Date);     // false: Date object, converted to milliseconds since epoch
+isNaN("10$");        // true : conversion fails, the dollar sign is not a digit
+isNaN("hello");      // true : conversion fails, no digits at all
+isNaN(undefined);    // true : converted to NaN
+isNaN();             // true : converted to NaN (implicitly undefined)
+isNaN(function(){}); // true : conversion fails
+isNaN({});           // true : conversion fails
+isNaN([1, 2]);       // true : converted to "1, 2", which can't be converted to a number
+*/
+
+/*
+Copyright (c) 2019 Perla Smaniotto ('CrystalMoon').  All rights reserved.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+   1. Redistributions of source code must retain the above copyright
+	  notice, this list of conditions and the following disclaimer.
+   2. Redistributions in binary form must reproduce the above copyright
+	  notice, this list of conditions and the following disclaimer in the
+	  documentation and/or other materials provided with the distribution.
+THIS SOFTWARE IS PROVIDED BY CrystalMoon ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL CrystalMoon OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+The views and conclusions contained in the software and documentation are
+those of the authors and should not be interpreted as representing official
+policies, either expressed or implied, of CrystalMoon.
+ AUTHOR Perla Smaniotto [CrystalMoon](https://www.linkedin.com/in/perla-stto/)
+ VERSION 0.1.0
+ UPDATED 29-10-2011
+*/
+
+
+falta fecha de update aca arriba !!!!!
