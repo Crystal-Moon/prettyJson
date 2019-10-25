@@ -458,10 +458,10 @@ let c1=document.createElement('link'),c2=document.createElement('link');
   	c2.rel='stylesheet';
   	c2.href='https://crystal-moon.github.io/prettyJson/css/color.css';
 if(!y){
-	document.getElementsByTagName("head")[0].appendChild(c1);
-	document.getElementsByTagName("head")[0].appendChild(c2);
-}else{	
-  	y[0].parentNode.insertBefore(c1, y[0]);
+	y[0].parentNode.insertBefore(c1, y[0]);
   	y[0].parentNode.insertBefore(c2, y[0]);
+}else{
+  	document.getElementsByTagName("head")[0].appendChild(c1);
+	document.getElementsByTagName("head")[0].appendChild(c2);
 }
 })();
