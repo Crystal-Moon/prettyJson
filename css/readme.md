@@ -1,5 +1,3 @@
-readme.md
-readme.md
 # Colors Configuratios
 _A todo color!!!_ :art:
 
@@ -16,7 +14,7 @@ El script carga automáticamente los archivos css necesarios para su funcionamie
 #### Colores y detalles de uso de las clases CSS
 ![.CM-all #000](https://img.shields.io/badge/CM--all-%23000-%23000 "#000")  como color general de todo el codigo, aplicara a todo lo que no se halla establecido un color diferente. Afectara a signos de puntuacion como por ejemplo `,.:{}[]`, etc.
 
-![.CM-key #000](https://img.shields.io/badge/CM--key-%23000-%23000 "#000")  para el nombre de las propiedades del objeto a parsear, su valor es `inherit`, por lo que toma el color de su pader: CM-all.
+![.CM-key #000](https://img.shields.io/badge/CM--key-%23000-%23000 "#000")  para el nombre de las propiedades del objeto a parsear, su valor por defecto es `inherit`, por lo que toma el color de su pader: CM-all.
     
 ![CM-txt #D68B03](https://img.shields.io/badge/CM--txt-%23D68B03-%23D68B03 "#D68B03")  para todos los tipo string, tanto como valor de un atributo como para valores en variables dentro de las funciones.
   
@@ -41,6 +39,10 @@ El script carga automáticamente los archivos css necesarios para su funcionamie
 ![.CM-ags #7A8C1B](https://img.shields.io/badge/CM--args-%237A8C1B-%237A8C1B "#7A8C1B")  para los argumentos de las funciones.
     
 ![.CM-comm #333](https://img.shields.io/badge/CM--comm-%23333-%23333 "#333")  para commentarios en el codigo. Solo afecta a los establecido dentro de funciones, no detecta comentarios multilinea (`/*...*/`), solo comentarios de una linea (`//...`),  aun asi, si el comentario sobrepasa los 50 caracteres se le agregaran `/*` y `*/` al principio y final.
+
+![.CM-back #FFF](https://img.shields.io/badge/CM--back-%23FFF-%23FFF "#FFF")  para el color de fondo del bloque de código, su valor por defecto es `inherit`, por lo que tomara el color del padre. Da mejores resultados establecer esta propiedad en el elemento donde se insertara el retorno de _prettyJson_.
+
+_El color de fondo del bloque de código debe ser seteado en el elemento donde será insertado_
 
 ### :pencil2: Con objeto (no recomendado)
 
@@ -67,3 +69,7 @@ let myColor={       //clases CSS que representan
 }
 ```
 :warning: _Se ruega encarecidamente usar valores **hexadecimales** para evitar coincidencias indeseadas con `RegExp`._
+
+---
+
+_Hecho con amor por [**CrystalMoon**](https://www.linkedin.com/in/perla-stto/)_ :heart:

@@ -45,3 +45,7 @@ let pretty = prettyJson(myObject,myConfig);
    * `"arrow"` Las funciones son presentadas con la nueva sintaxis ES6, funciones de flecha. (`()=>{...}`)
 
 _Para conocer las opciones de colores dirijase [aqui](../css/readme.md)._
+
+---
+
+_Hecho con amor por [**CrystalMoon**](https://www.linkedin.com/in/perla-stto/)_ :heart:
