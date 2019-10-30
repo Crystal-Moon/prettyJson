@@ -1,0 +1,51 @@
+.CM-all{
+	color: #000;
+}
+.CM-wu{
+	color: #008000;
+}
+.CM-wc{
+	color: #f75db0;
+}
+.CM-w{
+	color: #088ac5;
+	font-style: italic;
+}
+.CM-txt{
+	color: #d68b03;
+	overflow-wrap: break-word;
+}
+.CM-txt *{
+	color: inherit;
+}
+.CM-comm{
+	color: #333;
+}
+.CM-comm *{
+	color: inherit;
+}
+.CM-key{
+	color: inherit;
+}
+.CM-args{
+	color: #7a8c1b;
+	font-style: italic;
+}
+.CM-num{
+	color: #a272f7;
+}
+.CM-bool{
+	color: #4a7e96;
+}
+.CM-null, .CM-udf{
+	color: #cc0404;
+}
+.CM-x{
+	color: #f00;
+}
+.CM-index{
+	color: #444;
+}
+.CM-back{
+	background-color: inherit;
+}

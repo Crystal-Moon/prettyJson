@@ -1,32 +1,5 @@
+'use strict'
 function prittyJson(OBJ,CFG={},CLR={}){
-/*
-Copyright (c) 2019 Perla Smaniotto ('CrystalMoon').  All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-   1. Redistributions of source code must retain the above copyright
-	  notice, this list of conditions and the following disclaimer.
-   2. Redistributions in binary form must reproduce the above copyright
-	  notice, this list of conditions and the following disclaimer in the
-	  documentation and/or other materials provided with the distribution.
-THIS SOFTWARE IS PROVIDED BY CrystalMoon ``AS IS'' AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL CrystalMoon OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGE.
-The views and conclusions contained in the software and documentation are
-those of the authors and should not be interpreted as representing official
-policies, either expressed or implied, of CrystalMoon.
- AUTHOR Perla Smaniotto [CrystalMoon](https://www.linkedin.com/in/perla-stto/)
- VERSION 0.1.0
- UPDATED 24-10-2019
-*/
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ,CFG.replacer));
 const WWU=[],
 WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null',
@@ -385,13 +358,14 @@ app(r,v);
 
 let all=C(D), st=C(S), fin=C(S);
 cs(all,'CM-all');
+cs(all,'CM-back');
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
 app(all,st);
 if(CFG.font) all.style.fontFamily=CFG.font;
 if(CLR.all) all.style.color=CLR.all;
 
-for (key in OBJ) app(all,R(OBJ[key],key,isA(OBJ)));
+for (let key in OBJ) app(all,R(OBJ[key],key,isA(OBJ)));
 inn(fin,(isA(OBJ))?']':'}');
 cs(fin,CM.bk);
 app(all,fin);
@@ -399,6 +373,7 @@ app(all,fin);
 if(CFG.index){
 let nrs=C(S);
 cs(nrs,'CM-index');
+cs(nrs,'CM-back');
 if(CLR.index) nrs.style.color = CLR.index;
 for (let x= 1;x<=L;x++){
 	let a=C(S);
@@ -454,9 +429,9 @@ if(!Array.from){
 let y=Array.from(document.getElementsByTagName('link'));
 let c1=document.createElement('link'),c2=document.createElement('link');
   	c1.rel='stylesheet';
-  	c1.href='https://crystal-moon.github.io/prettyJson/css/gral.css';
+  	c1.href='https://crystal-moon.github.io/prettyJson/css/prettyJson.css';
   	c2.rel='stylesheet';
-  	c2.href='https://crystal-moon.github.io/prettyJson/css/color.css';
+  	c2.href='https://crystal-moon.github.io/prettyJson/css/prettyJson-color.css';
 if(!y){
 	y[0].parentNode.insertBefore(c1, y[0]);
   	y[0].parentNode.insertBefore(c2, y[0]);
