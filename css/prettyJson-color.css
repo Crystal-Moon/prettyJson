@@ -1,25 +1,28 @@
 .CM-all{
-	color: #000;
+	color: #fff;
+}
+.CM-x{
+	color: #b90404;
 }
 .CM-wu{
-	color: #008000;
+	color: #01ad01;
 }
 .CM-wc{
-	color: #f75db0;
+	color: #e8007d;
 }
 .CM-w{
-	color: #088ac5;
+	color: #2bb9f9;
 	font-style: italic;
 }
 .CM-txt{
-	color: #d68b03;
+	color: #f3db66;
 	overflow-wrap: break-word;
 }
 .CM-txt *{
 	color: inherit;
 }
 .CM-comm{
-	color: #333;
+	color: #555;
 }
 .CM-comm *{
 	color: inherit;
@@ -28,24 +31,21 @@
 	color: inherit;
 }
 .CM-args{
-	color: #7a8c1b;
+	color: #f5a004;
 	font-style: italic;
 }
 .CM-num{
 	color: #a272f7;
 }
 .CM-bool{
-	color: #4a7e96;
+	color: #5588b5;
 }
 .CM-null, .CM-udf{
 	color: #cc0404;
 }
-.CM-x{
-	color: #f00;
-}
 .CM-index{
-	color: #444;
+	color: #888;
 }
 .CM-back{
-	background-color: inherit;
+	background-color: #181a21;
 }

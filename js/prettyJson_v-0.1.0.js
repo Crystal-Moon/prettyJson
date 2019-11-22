@@ -338,7 +338,7 @@ if(t(J)==T.f){
 	inn(pp,(inn(atr)!='')?':{':'{'); 
 	cs(pp,CM.bk);
 	let oo=J;
-	for (kk in oo){
+	for (let kk in oo){
 		let v2=C(S), bb=R(oo[kk],kk);
 		app(v,bb);
 		cs(v2,CM.l);
@@ -359,6 +359,7 @@ app(r,v);
 let all=C(D), st=C(S), fin=C(S);
 cs(all,'CM-all');
 cs(all,'CM-back');
+if(CLR.back) all.style.backgroundColor = CLR.back;
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
 app(all,st);
@@ -374,6 +375,7 @@ if(CFG.index){
 let nrs=C(S);
 cs(nrs,'CM-index');
 cs(nrs,'CM-back');
+if(CLR.back) nrs.style.backgroundColor = CLR.back;
 if(CLR.index) nrs.style.color = CLR.index;
 for (let x= 1;x<=L;x++){
 	let a=C(S);
@@ -433,10 +435,10 @@ let c1=document.createElement('link'),c2=document.createElement('link');
   	c2.rel='stylesheet';
   	c2.href='https://crystal-moon.github.io/prettyJson/css/prettyJson-color.css';
 if(!y){
-	y[0].parentNode.insertBefore(c1, y[0]);
-  	y[0].parentNode.insertBefore(c2, y[0]);
-}else{
-  	document.getElementsByTagName("head")[0].appendChild(c1);
+	document.getElementsByTagName("head")[0].appendChild(c1);
 	document.getElementsByTagName("head")[0].appendChild(c2);
+}else{
+  	y[0].parentNode.insertBefore(c1, y[0]);
+  	y[0].parentNode.insertBefore(c2, y[0]);
 }
 })();

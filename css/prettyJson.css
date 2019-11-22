@@ -65,6 +65,9 @@ div.CM-a span.CM-v div.CM-a, div.CM-f span.CM-v div.CM-f{
 .CM-v{
 	overflow-wrap: break-word;
 }
+.CM-v>span{
+	display: inline-block;
+}
 .CM-tl{
 	flex: 1;
 }
