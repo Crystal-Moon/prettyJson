@@ -86,16 +86,31 @@ div.CM-a span.CM-v div.CM-a, div.CM-f span.CM-v div.CM-f{
 	margin-left: 0em;
 }
 .CM-f2{
-	margin-left: 2em;
+	margin-left: 1.2em;
 }
 .CM-f3{
-	margin-left: 4em;
+	margin-left: 2.4em;
 }
 .CM-f4{
-	margin-left: 6em;
+	margin-left: 3.6em;
 }
 .CM-f5{
-	margin-left: 8em;
+	margin-left: 5em;
+}
+.CM-f6{
+	margin-left: 6.2em;
+}
+.CM-f7{
+	margin-left: 7.4em;
+}
+.CM-f8{
+	margin-left: 8.6em;
+}
+.CM-f9{
+	margin-left: 10em;
+}
+.CM-f10{
+	margin-left: 11.2em;
 }
 .CM-index{
 	font-size: inherit;
