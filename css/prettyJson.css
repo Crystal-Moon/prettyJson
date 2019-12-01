@@ -101,11 +101,11 @@ div.CM-a span.CM-v div.CM-a, div.CM-f span.CM-v div.CM-f{
 	font-size: inherit;
     position: absolute;
     width: auto;
-    margin-left: -2em;
     flex-direction: column;
     display: flex;
     overflow: hidden;
     top: 0;
     bottom: 0;
     text-align: right;
+    white-space: pre;
 }

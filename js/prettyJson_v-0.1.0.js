@@ -1,5 +1,5 @@
 'use strict'
-function prittyJson(OBJ,CFG={},CLR={}){
+function prettyJson(OBJ,CFG={},CLR={}){
 OBJ=(CFG.noJson)?OBJ:JSON.parse(JSON.stringify(OBJ,CFG.replacer));
 const WWU=[],
 WWC=['if','else','return','async','await','switch','case','for','default','break','continue','Infinity','null',
@@ -320,7 +320,7 @@ if(t(J)==T.f){
 		cs(D1,CM.w);
 		if(CLR) cu(D1,CM.w);
 		inn(D1,'Date');
-		inn(dd,'"'+J.getFullYear() +'/'+(J.getMonth()+1)+'/'+J.getDate()+((J.getHours())?' '+J.getHours()+':'+
+		inn(dd,'"'+J.getFullYear() +'-'+(J.getMonth()+1)+'-'+J.getDate()+((J.getHours())?' '+J.getHours()+':'+
 			((J.getMinutes()<10)?'0'+J.getMinutes():J.getMinutes())+':'+((J.getSeconds()<10)?'0'+J.getSeconds():J.getSeconds()):'')+'"');
 		inn(f,'('+onn(dd)+')');
 		app(val,n);
@@ -358,7 +358,6 @@ app(r,v);
 
 let all=C(D), st=C(S), fin=C(S);
 cs(all,'CM-all');
-cs(all,'CM-back');
 if(CLR.back) all.style.backgroundColor = CLR.back;
 inn(st,(isA(OBJ))?'[':'{');
 cs(st,CM.bk);
@@ -372,25 +371,30 @@ cs(fin,CM.bk);
 app(all,fin);
 
 if(CFG.index){
-let nrs=C(S);
-cs(nrs,'CM-index');
-cs(nrs,'CM-back');
-if(CLR.back) nrs.style.backgroundColor = CLR.back;
-if(CLR.index) nrs.style.color = CLR.index;
-for (let x= 1;x<=L;x++){
+  let nrs=C(S);
+  cs(nrs,'CM-index');
+  if(CLR.back) nrs.style.backgroundColor = CLR.back;
+  if(CLR.index) nrs.style.color = CLR.index;
+  let x=1;
+  for(;x<=L;x++){
 	let a=C(S);
-	inn(a,x+'|');
+	inn(a,(x>999?x:x<10?' '+x:x)+'|');
 	app(nrs,a);
+  }
+  all.style.marginLeft = String(x+9).length*0.75+'em';
+  nrs.style.marginLeft = String(x+9).length*-0.75+'em';
+  app(all,nrs);
 }
-all.style.marginLeft='2em';
-app(all,nrs);
-}
+setTimeout(()=>{
+  cs(all.parentNode,'CM-back');
+  if(CLR.back) all.parentNode.style.backgroundColor = CLR.back;
+},90);
 return all;
 }
 
 (()=>{
 if(!Array.from){
-  console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el provisto por MDN "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill"\n - Atte: CrystalMoon');
+  console.warn('Su navegador no contiene "Array.from" method, necesario para "prettyJson" method, se implementara el polyfill provisto por %cMDN %chttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill\n%cAtte: %cCrystalMoon✨','font-weight:bold;color:blue;background-color:white;font-size:12px;','','font-weight:bold;','font-weight:bold;color:#44b3e0;font-family:cursive;font-size:14px;');
   Array.from=(function(){
     var toStr=Object.prototype.toString,
     isC=(fn)=>typeof fn==='function'||toStr.call(fn)==='[object Function]',
