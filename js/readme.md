@@ -17,7 +17,7 @@ let pretty = prettyJson(myObject,myConfig);
 ```
 ## Detalles
 `replacer`
-   : Al igual que el segundo parametro de [_stringify_](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/JSON/stringify#Par%C3%A1metros), prettyJson puede recibir una función que altera el comportamiento del proceso de conversión a  texto, o un array de `String` o `Number` que representan una lista de elementos válidos que se incluyen en la cadena resultante.
+  : Al igual que el segundo parametro de [_stringify_](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/JSON/stringify#Par%C3%A1metros), prettyJson puede recibir una función que altera el comportamiento del proceso de conversión a  texto, o un array de `String` o `Number` que representan una lista de elementos válidos que se incluyen en la cadena resultante.
 
 `indent`
    : Un numero positivo entre **1** y **10** que indica el espacios a usar como espacios en blanco; este espacio se representa en medida `em` del CSS. Si es mayor que 10, el valor es sólo `10`. Los valores inferiores a 1 o valores no numéricos son rechazados. Por default es **1**, lo que genera una indentación de `1em`.
