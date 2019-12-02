@@ -33,16 +33,17 @@ _prettyJosn_ agrega números de linea al margen izquierdo del bloque de código 
 
 - `noJson`  
 _prettyJson_ da la posibilidad de parsear tipos de datos que la sintaxis de JSON normalmente rechazaría. Tiene cuatro posibilidades:
-      * `false` (**default**) Convertirá todos los valores no permitidos a `null` y los valores del tipo Date aplicara `toISOString()` siempre que sea posible.
-      * `"function"` Convertirá las funciones a string y les aplicara el sistema de colores e indentado. El tamaño de las tabulaciones dentro de una función es de _1.2em_, y no se ve afectado por la opción `indent`.
-      * `"object"` Convertirá todos los valores no permitidos (excepto funciones) a una sintaxis tal cual se ve en un archivo de código, aplicándole también el sistema de colores.
-      * `"all"` Convertirá todos los valores no permitidos por la sintaxis JSON a elementos html y los presentara tal cual usted lo ve en un archivo JS.
+    * `false` (**default**) Convertirá todos los valores no permitidos a `null` y los valores del tipo Date aplicara `toISOString()` siempre que sea posible.
+    * `"function"` Convertirá las funciones a string y les aplicara el sistema de colores e indentado. El tamaño de las tabulaciones dentro de una función es de _1.2em_, y no se ve afectado por la opción `indent`.
+    * `"object"` Convertirá todos los valores no permitidos (excepto funciones) a una sintaxis tal cual se ve en un archivo de código, aplicándole también el sistema de colores.
+    * `"all"` Convertirá todos los valores no permitidos por la sintaxis JSON a elementos html y los presentara tal cual usted lo ve en un archivo JS.
 
 - `functions`  
 Elija en que formato se expresaran las funciones. Solo tendrá relevancia si la propiedad `noJson` se encuentra en `"function"` o `"all"`. Hay tres opciones:
-      * `null` (**default**) Las funciones son presentadas tal cual fueron declaradas en su archivo de código.
-      * `"function"` Las funciones son presentadas con la sintaxis que mantuvo javascript hasta ES5. (`function(){...}`)
-      * `"arrow"` Las funciones son presentadas con la nueva sintaxis ES6, funciones de flecha. (`()=>{...}`)
+    * `null` (**default**) Las funciones son presentadas tal cual fueron declaradas en su archivo de código.
+    * `"function"` Las funciones son presentadas con la sintaxis que mantuvo javascript hasta ES5. (`function(){...}`)
+    * `"arrow"` Las funciones son presentadas con la nueva sintaxis ES6, funciones de flecha. (`()=>{...}`)
+>>>>>>> 1382e434aeb5172088e0a2b80de1866702a2649c
 
 _Para conocer las opciones de colores dirijase [aqui](../css/readme.md)._
 
