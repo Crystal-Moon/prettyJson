@@ -20,17 +20,17 @@ prettyJson(myObject [,config [,color]]);
 
 ### Parametros
 
-myObject
-   : El objeto JSON a parsear.
+- **myObject**  
+El objeto JSON a parsear.
 
-config  **|**`opcional`
-   : Opcional. Un objeto de configuración cuyas propiedades afectaran al resultado visual. Para mas detalles sobre este parámetro consulte [aquí](js/readme.md).
+- **config |**`opcional`  
+Opcional. Un objeto de configuración cuyas propiedades afectaran al resultado visual. Para mas detalles sobre este parámetro consulte [aquí](js/readme.md).
 
-color **|**`opcional`
-   : Opcional. Un objeto que describirá los colores elegidos para cada parte del resultado. Para saber mas sobre este parámetro consulte [aquí](css/readme.md)
+- **color |**`opcional`  
+Opcional. Un objeto que describirá los colores elegidos para cada parte del resultado. Para saber mas sobre este parámetro consulte [aquí](css/readme.md)
 
-Retorno
-   : Este método retornara un elemento `<div>` listo para ser insertado en el documento html.
+- **Retorno**  
+Este método retornara un elemento `<div>` listo para ser insertado en el documento html.
 
 ## Descripción
 
