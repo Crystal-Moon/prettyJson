@@ -13,27 +13,29 @@ El script carga automáticamente los archivos css necesarios para su funcionamie
 #### Colores y detalles de uso de las clases CSS
 ![CM-all #FFF](https://img.shields.io/badge/CM--all-%23FFF-%23FFF "#FFF")  como color general de todo el código, aplicara a todo lo que no se halla establecido un color diferente. Afectara a signos de puntuacion como por ejemplo `,.:{}[]`, etc.
 
-![CM-key #FFF](https://img.shields.io/badge/CM--key-%23FFF-%23FFF "#FFF")  para el nombre de las propiedades del objeto a parsear, su valor por defecto es `inherit`, por lo que toma el color de su pader: CM-all.
+![CM-key #FFF](https://img.shields.io/badge/CM--key-%23FFF-%23FFF "#FFF")  para el nombre de las propiedades del objeto a parsear, su valor por defecto es `inherit`, por lo que toma el color de su padre: CM-all.
     
 ![CM-back #181A21](https://img.shields.io/badge/CM--back-%23181A21-%23181A21 "#181A21")  `background-color` del bloque de código. _prettyJson_ aplicará esta clase al elemento donde se coloca su retorno.
 
+![CM_index #888](https://img.shields.io/badge/CM--index-%23888-%23888 "#888")  para los numeros de linea. Se debe establecer el uso de `index` del objeto de configuraciones.
+
 ![CM-txt #F3DB66](https://img.shields.io/badge/CM--txt-%23F3DB66-%23F3DB66 "#F3DB66")  para todos los tipo string, tanto como valor de un atributo como para valores en variables dentro de las funciones.
   
-![CM-num #A272F7](https://img.shields.io/badge/CM--num-%23A272F7-%23A272F7 "#A272F7")  para todos los valores numericos.
-  
+![CM-num #5588B5](https://img.shields.io/badge/CM--num-%235588B5-%235588B5 "#5588B5")  para todos los valores numericos.
+
 ![CM-bool #5588B5](https://img.shields.io/badge/CM--bool-%235588B5-%235588B5 "#5588B5")  para valores booleanos.
+
+![CM-1xx #F3F37C](https://img.shields.io/badge/CM--1xx-%23F3F37C-%23F3F37C "#F3F37C") ![CM-2xx #7FFF00](https://img.shields.io/badge/CM--2xx-%237FFF00-%237FFF00 "#7FFF00") ![CM-3xx #02E2E2](https://img.shields.io/badge/CM--3xx-%2302E2E2-%2302E2E2 "#02E2E2") ![CM-4xx #FFA500](https://img.shields.io/badge/CM--4xx-%23FFA500-%23FFA500 "#FFA500") ![CM-5xx #F12525](https://img.shields.io/badge/CM--5xx-%23F12525-%23F12525 "#F12525") para códigos _HTTP_. No tendrá efecto si no se establece `api` en el objeto de configuraciones.
   
-![CM-null #CC0404](https://img.shields.io/badge/CM--null-%23CC0404-%23CC0404 "#CC0404")  para valores `null`.
+![CM-null #A272F7](https://img.shields.io/badge/CM--null-%23A272F7-%23A272F7 "#A272F7")  para valores `null`.
   
-![CM-udf #CC0404](https://img.shields.io/badge/CM--udf-%23CC0404-%23CC0404 "#CC0404")  para valores `undefined`. Solo surgira efecto si se establece el parseo de valores no permitidos.
+![CM-udf #A272F7](https://img.shields.io/badge/CM--udf-%23A272F7-%23A272F7 "#A272F7")  para valores `undefined`. Solo surgira efecto si se establece el parseo de valores no permitidos.
   
-![CM_index #888](https://img.shields.io/badge/CM--index-%23888-%23888 "#888")  para los numeros de linea. Se debe establecer el uso de `index` del objeto de configuraciones.
-  
-![CM-x #B90404](https://img.shields.io/badge/CM--x-%23B90404-%23B90404 "#B90404") para los operadores matematicos y lógicos en general, ejemplos `<>=+/%&!?`, etc. 
+![CM-x #B90404](https://img.shields.io/badge/CM--x-%23B90404-%23B90404 "#B90404") para los operadores matematicos y lógicos en general, ejemplo `<>=+/%&!?`, etc. 
    
 ![CM-wu #01AD01](https://img.shields.io/badge/CM--wu-%2301AD01-%2301AD01 "#01AD01")  para nombres de metodos, ya sean propios de javascript o creados por el usuario. Solo sera visible si se acepta el parseo de valores no permitidos. 
    
-![CM-wc #E8007D](https://img.shields.io/badge/CM--wc-%23E8007D-%23E8007D "#E8007D")  para palabras reservadas de control de bloques y bucles, ejemplo `for`, `while`, `try`, `catch`, `break`, `if else`, etc. 
+![CM-wc #E8007D](https://img.shields.io/badge/CM--wc-%23E8007D-%23E8007D "#E8007D")  para palabras reservadas de control de bloques y bucles, ejemplo `for`, `while`, `try-catch`, `break`, `if-else`, etc. 
    
 ![CM-w #2BB9F9](https://img.shields.io/badge/CM--w-%232BB9F9-%232BB9F9 "#2BB9F9")  para palabras reservadas propias del lenguaje que no sean de control de bloques, ejemplo `function`, `class`, `let`, `const`, `this`, etc. 
     

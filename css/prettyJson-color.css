@@ -49,3 +49,18 @@
 .CM-back{
 	background-color: #181a21;
 }
+.CM-1xx{
+	color: #f3f37c;
+}
+.CM-2xx{
+	color: #7fff00;
+}
+.CM-3xx{
+	color: #02e2e2;
+}
+.CM-4xx{
+	color: #ffa500;
+}
+.CM-5xx{
+	color: #f12525;
+}

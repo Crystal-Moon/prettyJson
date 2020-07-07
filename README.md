@@ -1,7 +1,7 @@
 # PrettyJson
 _Llevando **stringify** a otro nivel_ :rocket:
 
-![status](https://img.shields.io/badge/status-Beta-orange) ![readme](https://img.shields.io/badge/readme-OK-green) ![version](https://img.shields.io/badge/version-v0.1.0-blue) ![techs](https://img.shields.io/badge/techs-HTML5-blue)
+![status](https://img.shields.io/badge/status-Beta-green) ![readme](https://img.shields.io/badge/readme-OK-green) ![version](https://img.shields.io/badge/version-v0.2.0-blue) ![techs](https://img.shields.io/badge/techs-HTML5-blue)
 
 ---
 
@@ -10,7 +10,7 @@ La función `prettyJson` presenta una manera de mostrar código de manera agrada
 ## Instalación
 Incluya la siguiente etiqueta script a su documento y llame al método `prettyJson()` incluyendo el objeto a parsear.
 ```html
-<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.1.0.min.js"></script>
+<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.2.0.min.js"></script>
 ```
 
 ## Sintaxis
@@ -48,7 +48,7 @@ Puede copiar y ejecutar el siguiente ejemplo, jugando con las propiedades de `my
 
 <p id="myCode"></p>
 
-<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.1.0.min.js"></script>
+<script src="https://crystal-moon.github.io/prettyJson/js/prettyJson_v-0.2.0.min.js"></script>
 <script>
 let myCode = document.querySelector('#myCode');
 let myobj = {
@@ -76,6 +76,8 @@ Al igual que [_stringify_](https://developer.mozilla.org/es/docs/Web/JavaScript/
 _prettyJson_ puede colocar el numero de linea en el margen izquerdo del código y customizar el tamaño de las tabulaciones para darle un aspecto mas _'code'_ :wink:
 ##### :bomb: En cualquier etiqueta
 El resultado de _prettyJson_ no se limita a presentarse en etiquetas `<pre>` y/o `<code>` como otras librerías, puede ser incrustado en cualquiera que funcione como bloque, ya que cuenta con su propio conjunto de clases CSS para mantener el orden visual.
+##### :bomb: Ideal API Rest
+Use _prettyJson_ para diseñar su documentación API. Personalize como se ven las respuestas HTTP/HTTPS para una eficaz guía de usuario :green_book::orange_book:
 ##### :bomb: Valores no permitidos
 Como es de común conocimiento, al usar _stringify_, los valores de tipo `function`,`Symbol`,`NaN`, entre otros, son convertidos a `null`. Pero _prettyJson_ puede evitarlo y "prettyfiarlos" a todo color por usted!! :flushed:
 ##### :bomb: arrow functions
