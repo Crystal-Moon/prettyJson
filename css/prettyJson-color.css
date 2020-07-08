@@ -34,14 +34,11 @@
 	color: #f5a004;
 	font-style: italic;
 }
-.CM-num{
-	color: #a272f7;
-}
-.CM-bool{
+.CM-num, .CM-bool{
 	color: #5588b5;
 }
 .CM-null, .CM-udf{
-	color: #cc0404;
+	color: #A272F7;
 }
 .CM-index{
 	color: #888;
