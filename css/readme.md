@@ -21,7 +21,7 @@ El script carga automáticamente los archivos css necesarios para su funcionamie
 
 ![CM-txt #F3DB66](https://img.shields.io/badge/CM--txt-%23F3DB66-%23F3DB66 "#F3DB66")  para todos los tipo string, tanto como valor de un atributo como para valores en variables dentro de las funciones.
   
-![CM-num #5588B5](https://img.shields.io/badge/CM--num-%235588B5-%235588B5 "#5588B5")  para todos los valores numericos.
+![CM-num #5588B5](https://img.shields.io/badge/CM--num-%235588B5-%235588B5 "#5588B5")  para valores numericos.
 
 ![CM-bool #5588B5](https://img.shields.io/badge/CM--bool-%235588B5-%235588B5 "#5588B5")  para valores booleanos.
 
